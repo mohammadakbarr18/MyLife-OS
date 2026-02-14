@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@theme {
+    --font-sans: 'Inter', 'Poppins', ui-sans-serif, system-ui, sans-serif;
+
+    --color-cream: #FFF8F1;
+    --color-peach-light: #FFD1B3;
+    --color-peach-main: #FFB890;
+    --color-peach-dark: #E68A65;
+    --color-text-dark: #4A3B32;
+    --color-text-secondary: #9C8E85;
+
+    /* Vibe Code Design System */
+    --color-vibe-bg: #FEF6EF;
+    --color-vibe-text: #424242;
+    --color-vibe-accent: #FCE2CE;
+
+    --animate-float: float 6s ease-in-out infinite;
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+}
+
+/* Hide browser-default password reveal buttons */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none !important;
+}
+
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    height: 0;
+    width: 0;
+    margin: 0;
+}
