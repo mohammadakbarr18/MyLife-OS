@@ -46,3 +46,25 @@ input::-webkit-credentials-auto-fill-button {
     width: 0;
     margin: 0;
 }
+
+/* ========== App Layout ========== */
+.sidebar-link {
+    position: relative;
+}
+
+.sidebar-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 3px;
+    height: 60%;
+    border-radius: 0 4px 4px 0;
+    background-color: #5F402D;
+    transition: transform 0.2s ease;
+}
+
+.sidebar-link.bg-\[\#FCE2CE\]::before {
+    transform: translateY(-50%) scaleY(1);
+}
