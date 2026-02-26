@@ -25,19 +25,23 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// ========== Authenticated App Routes (Placeholder) ==========
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// ========== Authenticated App Routes ==========
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/transactions', function () {
-    return view('dashboard'); // placeholder
-})->name('transactions');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-Route::get('/todos', function () {
-    return view('dashboard'); // placeholder
-})->name('todos');
+    Route::get('/transactions', function () {
+        return view('transactions');
+    })->name('transactions');
 
-Route::get('/settings', function () {
-    return view('dashboard'); // placeholder
-})->name('settings');
+    Route::get('/todo', function () {
+        return view('todo');
+    })->name('todo');
+
+    Route::get('/settings', function () {
+        return view('dashboard'); // placeholder — settings page TBD
+    })->name('settings');
+
+});
