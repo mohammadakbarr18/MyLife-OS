@@ -58,10 +58,10 @@
                 </a>
 
                 <!-- To-Do List -->
-                <a href="{{ route('todos') }}"
+                <a href="{{ route('todo') }}"
                    class="sidebar-link group flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-200
-                          {{ request()->routeIs('todos*') ? 'bg-[#FCE2CE] text-[#5F402D] shadow-sm' : 'text-gray-500 hover:bg-[#FEF6EF] hover:text-[#5F402D]' }}">
-                    <svg class="w-5 h-5 transition-colors {{ request()->routeIs('todos*') ? 'text-[#5F402D]' : 'text-gray-400 group-hover:text-[#5F402D]' }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          {{ request()->routeIs('todo*') ? 'bg-[#FCE2CE] text-[#5F402D] shadow-sm' : 'text-gray-500 hover:bg-[#FEF6EF] hover:text-[#5F402D]' }}">
+                    <svg class="w-5 h-5 transition-colors {{ request()->routeIs('todo*') ? 'text-[#5F402D]' : 'text-gray-400 group-hover:text-[#5F402D]' }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                     </svg>
                     To-Do List
@@ -168,15 +168,26 @@
             <!-- ============================================================== -->
             <!-- DESKTOP TOP BAR -->
             <!-- ============================================================== -->
-            <header class="hidden lg:block sticky top-0 z-30 bg-[#FEF6EF]/80 backdrop-blur-lg">
-                <div class="flex items-center justify-between px-8 py-5">
+            <header class="hidden lg:block sticky top-0 z-50 bg-[#FEF6EF]/90 backdrop-blur-md border-b border-gray-200/50">
+                <div class="flex items-end justify-between px-8 pt-6 pb-6 mb-0">
+                    {{-- Left Side: Page Title & Subtitle --}}
                     <div>
-                        <h1 class="text-xl font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
+                        <h1 class="text-4xl font-extrabold text-[#3E2723] tracking-tight" style="font-family: 'Poppins', sans-serif;">
                             @yield('page-title', 'Dashboard')
                         </h1>
-                        <p class="text-sm text-gray-400 mt-0.5">@yield('page-subtitle', 'Welcome back, ' . (Auth::user()->name ?? 'User') . '!')</p>
+                        <p class="text-base font-medium text-gray-500 mt-1">@yield('page-subtitle', 'Welcome back, ' . (Auth::user()->name ?? 'User') . '!')</p>
                     </div>
-                    <div class="flex items-center gap-4">
+
+                    {{-- Right Side: Date Widget & Notification --}}
+                    <div class="flex items-center gap-3">
+                        {{-- Date Pill Widget --}}
+                        <div class="bg-white px-4 py-2 rounded-full shadow-sm text-sm font-medium text-[#5F402D] border border-gray-100 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                            </svg>
+                            {{ now()->translatedFormat('D, d M Y') }}
+                        </div>
+
                         <!-- Notification Bell -->
                         <button class="w-10 h-10 rounded-2xl bg-white flex items-center justify-center shadow-sm hover:shadow-md transition-shadow border border-gray-100">
                             <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -190,7 +201,7 @@
             <!-- ============================================================== -->
             <!-- PAGE CONTENT -->
             <!-- ============================================================== -->
-            <main class="flex-1 px-5 py-6 lg:px-8 lg:py-2 pb-28 lg:pb-8">
+            <main class="flex-1 px-5 py-6 lg:px-8 lg:pt-8 pb-28 lg:pb-8">
                 @yield('content')
             </main>
 
@@ -228,10 +239,10 @@
             </a>
 
             <!-- To-Do List -->
-            <a href="{{ route('todos') }}"
+            <a href="{{ route('todo') }}"
                class="flex flex-col items-center gap-1 py-1.5 px-3 rounded-2xl transition-all duration-200
-                      {{ request()->routeIs('todos*') ? 'text-[#5F402D]' : 'text-gray-400' }}">
-                <div class="p-1.5 rounded-xl transition-colors {{ request()->routeIs('todos*') ? 'bg-[#FCE2CE]' : '' }}">
+                      {{ request()->routeIs('todo*') ? 'text-[#5F402D]' : 'text-gray-400' }}">
+                <div class="p-1.5 rounded-xl transition-colors {{ request()->routeIs('todo*') ? 'bg-[#FCE2CE]' : '' }}">
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                     </svg>
