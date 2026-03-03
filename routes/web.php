@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,20 +31,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ========== Authenticated App Routes ==========
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
-    Route::get('/transactions', function () {
-        return view('transactions');
-    })->name('transactions');
-
-    Route::get('/todo', function () {
-        return view('todo');
-    })->name('todo');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions');
+    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+    
+    Route::get('/todo', [TodoController::class, 'index'])->name('todo');
+    Route::post('/todo', [TodoController::class, 'store'])->name('todo.store');
 
     Route::get('/settings', function () {
-        return view('dashboard'); // placeholder — settings page TBD
+        return view('settings');
     })->name('settings');
 
 });
