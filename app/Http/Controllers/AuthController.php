@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,11 +21,16 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        User::create([
+        $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        // Seed default categories for the new user
+        foreach (Category::defaults() as $category) {
+            $user->categories()->create($category);
+        }
 
         return redirect()->route('login')->with('status', 'Registration successful! Please log in.');
     }

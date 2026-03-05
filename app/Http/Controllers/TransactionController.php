@@ -14,6 +14,7 @@ class TransactionController extends Controller
     {
         $transactions = Auth::user()
             ->transactions()
+            ->with('category')
             ->orderBy('date', 'desc')
             ->orderBy('created_at', 'desc')
             ->get();
@@ -29,7 +30,7 @@ class TransactionController extends Controller
         $validated = $request->validate([
             'type'        => 'required|in:income,expense',
             'amount'      => 'required|numeric|min:1',
-            'category'    => 'required|string',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'date'        => 'required|date',
         ]);
