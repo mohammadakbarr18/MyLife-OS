@@ -45,28 +45,9 @@
     </div>
 
     {{-- Financial Stats Cards --}}
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
 
-        {{-- Card 1: Current Balance --}}
-        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100/50
-                    hover:shadow-md transition-shadow duration-300">
-            <div class="flex items-center gap-3 mb-3">
-                <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3" />
-                    </svg>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500 font-medium leading-tight">Total Balance</p>
-                    <p class="text-xs text-gray-400">Sisa Saldo</p>
-                </div>
-            </div>
-            <p class="text-2xl font-extrabold whitespace-nowrap {{ $totalBalance >= 0 ? 'text-gray-800' : 'text-red-600' }}">
-                Rp {{ $formattedBalance }}
-            </p>
-        </div>
-
-        {{-- Card 2: Total Income --}}
+        {{-- Card 1: Total Income --}}
         <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100/50
                     hover:shadow-md transition-shadow duration-300">
             <div class="flex items-center gap-3 mb-3">
@@ -85,7 +66,7 @@
             </p>
         </div>
 
-        {{-- Card 3: Total Expense --}}
+        {{-- Card 2: Total Expense --}}
         <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100/50
                     hover:shadow-md transition-shadow duration-300">
             <div class="flex items-center gap-3 mb-3">
@@ -157,19 +138,6 @@
                         </thead>
                         <tbody class="divide-y divide-gray-50">
                             @foreach($recentTransactions as $transaction)
-                                @php
-                                    $categoryStyles = [
-                                        'Salary'        => ['bg' => 'bg-emerald-50', 'text' => 'text-emerald-700', 'border' => 'border-emerald-200/60', 'emoji' => '💰'],
-                                        'Freelance'     => ['bg' => 'bg-purple-50', 'text' => 'text-purple-700', 'border' => 'border-purple-200/60', 'emoji' => '💻'],
-                                        'Bonus'         => ['bg' => 'bg-yellow-50', 'text' => 'text-yellow-700', 'border' => 'border-yellow-200/60', 'emoji' => '🎉'],
-                                        'Food'          => ['bg' => 'bg-amber-50', 'text' => 'text-amber-700', 'border' => 'border-amber-200/60', 'emoji' => '🍔'],
-                                        'Transport'     => ['bg' => 'bg-blue-50', 'text' => 'text-blue-700', 'border' => 'border-blue-200/60', 'emoji' => '🚗'],
-                                        'Bills'         => ['bg' => 'bg-rose-50', 'text' => 'text-rose-700', 'border' => 'border-rose-200/60', 'emoji' => '📄'],
-                                        'Entertainment' => ['bg' => 'bg-pink-50', 'text' => 'text-pink-700', 'border' => 'border-pink-200/60', 'emoji' => '🎮'],
-                                        'Shopping'      => ['bg' => 'bg-indigo-50', 'text' => 'text-indigo-700', 'border' => 'border-indigo-200/60', 'emoji' => '🛍️'],
-                                    ];
-                                    $style = $categoryStyles[$transaction->category] ?? ['bg' => 'bg-gray-50', 'text' => 'text-gray-700', 'border' => 'border-gray-200/60', 'emoji' => '📌'];
-                                @endphp
                                 <tr class="hover:bg-[#FEF6EF]/50 transition-colors duration-150">
                                     <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                                         {{ $transaction->date->format('d M') }}
@@ -178,10 +146,17 @@
                                         <p class="text-sm font-medium text-gray-700">{{ $transaction->description }}</p>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
-                                                     {{ $style['bg'] }} {{ $style['text'] }} border {{ $style['border'] }}">
-                                            {{ $style['emoji'] }} {{ $transaction->category }}
-                                        </span>
+                                        @if($transaction->category)
+                                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold
+                                                         bg-gray-50 text-gray-700 border border-gray-200/60">
+                                                {{ $transaction->category->icon }} {{ $transaction->category->name }}
+                                            </span>
+                                        @else
+                                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
+                                                         bg-gray-50 text-gray-500 border border-gray-200/60">
+                                                Uncategorized
+                                            </span>
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4 text-sm font-semibold text-right whitespace-nowrap
                                                {{ $transaction->type === 'income' ? 'text-green-600' : 'text-red-500' }}">

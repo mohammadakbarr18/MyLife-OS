@@ -15,9 +15,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         // ── Financial Summary ────────────────────────────────
-        $totalIncome  = $user->transactions()->where('type', 'income')->sum('amount');
-        $totalExpense = $user->transactions()->where('type', 'expense')->sum('amount');
-        $totalBalance = $totalIncome - $totalExpense;
+
 
         // Current month only
         $incomeThisMonth = $user->transactions()
@@ -33,12 +31,12 @@ class DashboardController extends Controller
             ->sum('amount');
 
         // ── Format for display ────────────────────────────────
-        $formattedBalance = $this->formatRupiahShorthand($totalBalance);
         $formattedIncome  = $this->formatRupiahShorthand($incomeThisMonth);
         $formattedExpense = $this->formatRupiahShorthand($expenseThisMonth);
 
         // ── Recent Transactions (latest 5) ───────────────────
         $recentTransactions = $user->transactions()
+            ->with('category')
             ->orderBy('date', 'desc')
             ->orderBy('created_at', 'desc')
             ->limit(5)
@@ -51,10 +49,8 @@ class DashboardController extends Controller
             ->get();
 
         return view('dashboard', compact(
-            'totalBalance',
             'incomeThisMonth',
             'expenseThisMonth',
-            'formattedBalance',
             'formattedIncome',
             'formattedExpense',
             'recentTransactions',

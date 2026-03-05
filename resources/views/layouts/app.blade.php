@@ -348,25 +348,27 @@
                                             <!-- Category -->
                                             <div class="relative">
                                                 <label for="category" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Category</label>
-                                                <select name="category" id="category" required
+                                                <select name="category_id" id="category" required
                                                         class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer outline-none appearance-none pr-10 relative">
                                                     <option value="" disabled selected>Select...</option>
-                                                    <!-- Income Categories -->
+                                                    <!-- Income Categories (Dynamic) -->
                                                     <template x-if="transactionType === 'income'">
                                                         <optgroup label="Income">
-                                                            <option value="Salary">💰 Salary</option>
-                                                            <option value="Freelance">💻 Freelance</option>
-                                                            <option value="Bonus">🎉 Bonus</option>
+                                                            @isset($globalIncomeCategories)
+                                                                @foreach($globalIncomeCategories as $cat)
+                                                                    <option value="{{ $cat->id }}">{{ $cat->icon }} {{ $cat->name }}</option>
+                                                                @endforeach
+                                                            @endisset
                                                         </optgroup>
                                                     </template>
-                                                    <!-- Expense Categories -->
+                                                    <!-- Expense Categories (Dynamic) -->
                                                     <template x-if="transactionType === 'expense'">
                                                         <optgroup label="Expense">
-                                                            <option value="Food">🍔 Food</option>
-                                                            <option value="Transport">🚗 Transport</option>
-                                                            <option value="Bills">📄 Bills</option>
-                                                            <option value="Entertainment">🎮 Entertainment</option>
-                                                            <option value="Shopping">🛍️ Shopping</option>
+                                                            @isset($globalExpenseCategories)
+                                                                @foreach($globalExpenseCategories as $cat)
+                                                                    <option value="{{ $cat->id }}">{{ $cat->icon }} {{ $cat->name }}</option>
+                                                                @endforeach
+                                                            @endisset
                                                         </optgroup>
                                                     </template>
                                                 </select>

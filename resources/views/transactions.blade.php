@@ -55,19 +55,6 @@
                     </thead>
                     <tbody class="divide-y divide-gray-50">
                         @foreach($transactions as $transaction)
-                            @php
-                                $categoryStyles = [
-                                    'Salary'        => ['bg' => 'bg-emerald-50', 'text' => 'text-emerald-700', 'border' => 'border-emerald-200/60', 'emoji' => '💰'],
-                                    'Freelance'     => ['bg' => 'bg-purple-50', 'text' => 'text-purple-700', 'border' => 'border-purple-200/60', 'emoji' => '💻'],
-                                    'Bonus'         => ['bg' => 'bg-yellow-50', 'text' => 'text-yellow-700', 'border' => 'border-yellow-200/60', 'emoji' => '🎉'],
-                                    'Food'          => ['bg' => 'bg-amber-50', 'text' => 'text-amber-700', 'border' => 'border-amber-200/60', 'emoji' => '🍔'],
-                                    'Transport'     => ['bg' => 'bg-blue-50', 'text' => 'text-blue-700', 'border' => 'border-blue-200/60', 'emoji' => '🚗'],
-                                    'Bills'         => ['bg' => 'bg-rose-50', 'text' => 'text-rose-700', 'border' => 'border-rose-200/60', 'emoji' => '📄'],
-                                    'Entertainment' => ['bg' => 'bg-pink-50', 'text' => 'text-pink-700', 'border' => 'border-pink-200/60', 'emoji' => '🎮'],
-                                    'Shopping'      => ['bg' => 'bg-indigo-50', 'text' => 'text-indigo-700', 'border' => 'border-indigo-200/60', 'emoji' => '🛍️'],
-                                ];
-                                $style = $categoryStyles[$transaction->category] ?? ['bg' => 'bg-gray-50', 'text' => 'text-gray-700', 'border' => 'border-gray-200/60', 'emoji' => '📌'];
-                            @endphp
                             <tr class="hover:bg-[#FEF6EF]/50 transition-colors duration-150">
                                 <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                                     {{ $transaction->date->format('d M Y') }}
@@ -76,10 +63,17 @@
                                     <p class="text-sm font-medium text-gray-700">{{ $transaction->description }}</p>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
-                                                 {{ $style['bg'] }} {{ $style['text'] }} border {{ $style['border'] }}">
-                                        {{ $style['emoji'] }} {{ $transaction->category }}
-                                    </span>
+                                    @if($transaction->category)
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold
+                                                     bg-gray-50 text-gray-700 border border-gray-200/60">
+                                            {{ $transaction->category->icon }} {{ $transaction->category->name }}
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
+                                                     bg-gray-50 text-gray-500 border border-gray-200/60">
+                                            Uncategorized
+                                        </span>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     @if($transaction->type === 'income')

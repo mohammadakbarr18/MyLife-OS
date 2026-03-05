@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -39,8 +40,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/todo', [TodoController::class, 'index'])->name('todo');
     Route::post('/todo', [TodoController::class, 'store'])->name('todo.store');
 
-    Route::get('/settings', function () {
-        return view('settings');
-    })->name('settings');
+    // ========== Settings ==========
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+    Route::post('/settings/categories', [SettingsController::class, 'storeCategory'])->name('settings.categories.store');
+    Route::put('/settings/categories/{category}', [SettingsController::class, 'updateCategory'])->name('settings.categories.update');
+    Route::delete('/settings/categories/{category}', [SettingsController::class, 'destroyCategory'])->name('settings.categories.destroy');
 
 });
+
