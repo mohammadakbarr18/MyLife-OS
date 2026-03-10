@@ -36,7 +36,7 @@
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100/50 overflow-hidden">
 
         {{-- List Header --}}
-        <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-100">
             <p class="text-sm font-semibold text-gray-500">All Tasks</p>
             <span class="text-xs font-bold text-[#5F402D] bg-[#FCE2CE]/50 px-3 py-1 rounded-full">
                 {{ $totalCount }} {{ Str::plural('task', $totalCount) }}
@@ -47,7 +47,7 @@
             {{-- Task Items --}}
             <div class="divide-y divide-gray-50">
                 @foreach($todos as $todo)
-                    <div class="flex items-center gap-4 px-6 py-4 hover:bg-[#FEF6EF]/50 transition-colors duration-150 group">
+                    <div class="flex items-center gap-4 px-4 sm:px-6 py-3 sm:py-4 hover:bg-[#FEF6EF]/50 transition-colors duration-150 group">
                         {{-- Checkbox --}}
                         <input type="checkbox" {{ $todo->status === 'completed' ? 'checked' : '' }} disabled
                                class="w-5 h-5 rounded-lg border-2 border-gray-300 text-[#5F402D]
@@ -97,7 +97,7 @@
             </div>
 
             {{-- Summary Footer --}}
-            <div class="px-6 py-4 border-t border-gray-100">
+            <div class="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100">
                 <div class="flex items-center justify-between">
                     <p class="text-xs text-gray-400 font-medium">Completed</p>
                     <p class="text-xs font-bold text-[#5F402D]">{{ $completedCount }} / {{ $totalCount }}</p>
@@ -111,7 +111,7 @@
             </div>
         @else
             {{-- Empty State --}}
-            <div class="flex flex-col items-center justify-center py-20 px-6">
+            <div class="flex flex-col items-center justify-center py-20 px-4 sm:px-6">
                 {{-- Icon --}}
                 <div class="w-20 h-20 rounded-3xl bg-[#FCE2CE]/50 flex items-center justify-center mb-6">
                     <svg class="w-10 h-10 text-[#5F402D]/40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

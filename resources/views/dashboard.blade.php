@@ -104,7 +104,7 @@
         {{-- Widget A: Recent Transactions (2 columns) --}}
         <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100/50 overflow-hidden">
             {{-- Widget Header --}}
-            <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+            <div class="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-100">
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-xl bg-[#FCE2CE] flex items-center justify-center">
                         <svg class="w-4.5 h-4.5 text-[#5F402D]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -124,9 +124,40 @@
                 </a>
             </div>
 
-            {{-- Table --}}
+            {{-- Transaction Items --}}
             @if($recentTransactions->isNotEmpty())
-                <div class="overflow-x-auto">
+
+                {{-- ========== MOBILE: Card Layout (visible < md) ========== --}}
+                <div class="md:hidden divide-y divide-gray-100/80">
+                    @foreach($recentTransactions as $transaction)
+                        <div class="px-4 py-3.5 hover:bg-[#FEF6EF]/50 transition-colors duration-150">
+                            <div class="flex items-center justify-between gap-3">
+                                {{-- Left: Icon + Details --}}
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-base
+                                                {{ $transaction->type === 'income' ? 'bg-emerald-50' : 'bg-red-50' }}">
+                                        @if($transaction->category)
+                                            {{ $transaction->category->icon }}
+                                        @else
+                                            {{ $transaction->type === 'income' ? '💰' : '💸' }}
+                                        @endif
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p class="text-sm font-semibold text-[#3E2723] truncate">{{ $transaction->description ?: 'No description' }}</p>
+                                        <p class="text-xs text-gray-400 mt-0.5">{{ $transaction->date->format('d M') }}</p>
+                                    </div>
+                                </div>
+                                {{-- Right: Amount --}}
+                                <p class="text-sm font-bold flex-shrink-0 {{ $transaction->type === 'income' ? 'text-emerald-600' : 'text-red-500' }}">
+                                    {{ $transaction->type === 'income' ? '+' : '-' }}Rp {{ number_format($transaction->amount, 0, ',', '.') }}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- ========== DESKTOP: Table Layout (visible ≥ md) ========== --}}
+                <div class="hidden md:block overflow-x-auto">
                     <table class="w-full">
                         <thead>
                             <tr class="text-left">
@@ -167,9 +198,10 @@
                         </tbody>
                     </table>
                 </div>
+
             @else
                 {{-- Empty state --}}
-                <div class="px-6 py-12 text-center">
+                <div class="px-4 sm:px-6 py-12 text-center">
                     <p class="text-sm text-gray-400">No transactions yet. Start tracking your finances!</p>
                 </div>
             @endif
@@ -183,7 +215,7 @@
         @endphp
         <div class="lg:col-span-1 bg-white rounded-2xl shadow-sm border border-gray-100/50 overflow-hidden">
             {{-- Widget Header --}}
-            <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+            <div class="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-100">
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-xl bg-[#FCE2CE] flex items-center justify-center">
                         <svg class="w-4.5 h-4.5 text-[#5F402D]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -204,7 +236,7 @@
             </div>
 
             {{-- Task List --}}
-            <div class="px-6 py-4 space-y-1">
+            <div class="px-4 sm:px-6 py-3 sm:py-4 space-y-1">
                 @forelse($todayTodos as $todo)
                     <label class="flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer
                                   hover:bg-[#FEF6EF]/70 transition-colors duration-150 group">
@@ -223,7 +255,7 @@
             </div>
 
             {{-- Task Summary Footer --}}
-            <div class="px-6 py-4 border-t border-gray-100">
+            <div class="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100">
                 <div class="flex items-center justify-between">
                     <p class="text-xs text-gray-400 font-medium">Completed</p>
                     <p class="text-xs font-bold text-[#5F402D]">{{ $completedCount }} / {{ $totalTodoCount }}</p>
