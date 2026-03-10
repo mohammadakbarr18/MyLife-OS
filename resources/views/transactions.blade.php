@@ -8,7 +8,7 @@
 
     {{-- Summary Hub Banner --}}
     <a href="{{ route('transactions.summary') }}"
-       class="group flex items-center gap-5 p-5 mb-8 bg-white rounded-2xl border border-[#FCE2CE]/80
+       class="group flex items-center gap-3 sm:gap-5 p-4 sm:p-5 mb-8 bg-white rounded-2xl border border-[#FCE2CE]/80
               shadow-sm hover:shadow-lg hover:border-[#FCE2CE] hover:-translate-y-0.5
               transition-all duration-300 cursor-pointer">
         {{-- Icon --}}
@@ -64,11 +64,56 @@
         </div>
     </div>
 
-    {{-- Transactions Table --}}
+    {{-- Transactions List --}}
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100/50 overflow-hidden">
 
         @if($transactions->isNotEmpty())
-            <div class="overflow-x-auto">
+
+            {{-- ========== MOBILE: Card Layout (visible < md) ========== --}}
+            <div class="md:hidden divide-y divide-gray-100/80">
+                @foreach($transactions as $transaction)
+                    <div class="px-4 py-4 hover:bg-[#FEF6EF]/50 transition-colors duration-150">
+                        <div class="flex items-start justify-between gap-3">
+                            {{-- Left: Icon + Details --}}
+                            <div class="flex items-start gap-3 min-w-0">
+                                {{-- Category Icon Circle --}}
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-lg
+                                            {{ $transaction->type === 'income' ? 'bg-emerald-50' : 'bg-red-50' }}">
+                                    @if($transaction->category)
+                                        {{ $transaction->category->icon }}
+                                    @else
+                                        {{ $transaction->type === 'income' ? '💰' : '💸' }}
+                                    @endif
+                                </div>
+                                {{-- Text --}}
+                                <div class="min-w-0">
+                                    <p class="text-sm font-semibold text-[#3E2723] truncate">{{ $transaction->description ?: 'No description' }}</p>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        @if($transaction->category)
+                                            <span class="text-xs text-gray-500">{{ $transaction->category->name }}</span>
+                                            <span class="text-gray-300">·</span>
+                                        @endif
+                                        <span class="text-xs text-gray-400">{{ $transaction->date->format('d M Y') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- Right: Amount --}}
+                            <div class="text-right flex-shrink-0">
+                                <p class="text-sm font-bold {{ $transaction->type === 'income' ? 'text-emerald-600' : 'text-red-500' }}">
+                                    {{ $transaction->type === 'income' ? '+' : '-' }}Rp {{ number_format($transaction->amount, 0, ',', '.') }}
+                                </p>
+                                <span class="text-[10px] font-semibold uppercase tracking-wide
+                                             {{ $transaction->type === 'income' ? 'text-emerald-500' : 'text-red-400' }}">
+                                    {{ $transaction->type }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- ========== DESKTOP: Table Layout (visible ≥ md) ========== --}}
+            <div class="hidden md:block overflow-x-auto">
                 <table class="w-full">
                     <thead>
                         <tr class="text-left border-b border-gray-100">
@@ -123,9 +168,10 @@
                     </tbody>
                 </table>
             </div>
+
         @else
             {{-- Empty State --}}
-            <div class="flex flex-col items-center justify-center py-20 px-6">
+            <div class="flex flex-col items-center justify-center py-20 px-4 sm:px-6">
                 {{-- Icon --}}
                 <div class="w-20 h-20 rounded-3xl bg-[#FCE2CE]/50 flex items-center justify-center mb-6">
                     <svg class="w-10 h-10 text-[#5F402D]/40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

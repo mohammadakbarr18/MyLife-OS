@@ -36,7 +36,7 @@
         {{-- ======== INCOME CATEGORIES ======== --}}
         <div x-data="categoryManager('income', {{ $incomeCategories->toJson() }})" class="bg-white rounded-3xl shadow-sm border border-gray-100/50 overflow-hidden">
             {{-- Card Header --}}
-            <div class="px-6 py-5 border-b border-gray-100/80 flex items-center justify-between">
+            <div class="px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-100/80 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center shadow-sm">
                         <svg class="w-5 h-5 text-emerald-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -58,7 +58,7 @@
             </div>
 
             {{-- Category List --}}
-            <div class="px-4 py-3 space-y-1.5 max-h-[400px] overflow-y-auto">
+            <div class="px-3 sm:px-4 py-2.5 sm:py-3 space-y-1.5 max-h-[400px] overflow-y-auto">
                 @forelse($incomeCategories as $cat)
                     <div class="group flex items-center justify-between px-4 py-3 rounded-2xl hover:bg-[#FEF6EF] transition-all duration-200">
                         <div class="flex items-center gap-3">
