@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,5 +41,55 @@ class TodoController extends Controller
         ]);
 
         return back()->with('success', 'Task added!');
+    }
+
+    /**
+     * Toggle a todo's completion status (AJAX).
+     */
+    public function toggle(Todo $todo)
+    {
+        abort_unless($todo->user_id === Auth::id(), 403);
+
+        $todo->status = $todo->status === 'completed' ? 'pending' : 'completed';
+        $todo->save();
+
+        return response()->json([
+            'success'      => true,
+            'is_completed' => $todo->status === 'completed',
+        ]);
+    }
+
+    /**
+     * Update an existing todo.
+     */
+    public function update(Request $request, Todo $todo)
+    {
+        abort_unless($todo->user_id === Auth::id(), 403);
+
+        $validated = $request->validate([
+            'title'    => 'required|max:255',
+            'priority' => 'required|in:high,medium,low',
+            'due_date' => 'nullable|date',
+        ]);
+
+        $todo->update([
+            'title'    => $validated['title'],
+            'priority' => $validated['priority'],
+            'due_date' => $validated['due_date'],
+        ]);
+
+        return back()->with('success', 'Task updated successfully!');
+    }
+
+    /**
+     * Delete a todo.
+     */
+    public function destroy(Todo $todo)
+    {
+        abort_unless($todo->user_id === Auth::id(), 403);
+
+        $todo->delete();
+
+        return back()->with('success', 'Task deleted successfully!');
     }
 }

@@ -40,6 +40,9 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/todo', [TodoController::class, 'index'])->name('todo');
     Route::post('/todo', [TodoController::class, 'store'])->name('todo.store');
+    Route::patch('/todo/{todo}/toggle', [TodoController::class, 'toggle'])->name('todo.toggle');
+    Route::put('/todo/{todo}', [TodoController::class, 'update'])->name('todo.update');
+    Route::delete('/todo/{todo}', [TodoController::class, 'destroy'])->name('todo.destroy');
 
     // ========== Settings ==========
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');

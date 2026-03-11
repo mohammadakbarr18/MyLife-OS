@@ -211,9 +211,9 @@
         @php
             $completedCount = $todayTodos->where('status', 'completed')->count();
             $totalTodoCount = $todayTodos->count();
-            $progressPercent = $totalTodoCount > 0 ? round(($completedCount / $totalTodoCount) * 100) : 0;
         @endphp
-        <div class="lg:col-span-1 bg-white rounded-2xl shadow-sm border border-gray-100/50 overflow-hidden">
+        <div class="lg:col-span-1 bg-white rounded-2xl shadow-sm border border-gray-100/50 overflow-hidden"
+             x-data="{ completedCount: {{ $completedCount }}, totalCount: {{ $totalTodoCount }} }">
             {{-- Widget Header --}}
             <div class="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-100">
                 <div class="flex items-center gap-3">
@@ -239,11 +239,22 @@
             <div class="px-4 sm:px-6 py-3 sm:py-4 space-y-1">
                 @forelse($todayTodos as $todo)
                     <label class="flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer
-                                  hover:bg-[#FEF6EF]/70 transition-colors duration-150 group">
-                        <input type="checkbox" {{ $todo->status === 'completed' ? 'checked' : '' }} disabled
+                                  hover:bg-[#FEF6EF]/70 transition-colors duration-150 group"
+                           x-data="{ completed: {{ $todo->status === 'completed' ? 'true' : 'false' }} }">
+                        <input type="checkbox" :checked="completed"
+                               @click="fetch('{{ route('todo.toggle', $todo->id) }}', {
+                                   method: 'PATCH',
+                                   headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' }
+                               }).then(r => r.json()).then(data => {
+                                   let was = completed;
+                                   completed = data.is_completed;
+                                   if (!was && completed) completedCount++;
+                                   if (was && !completed) completedCount--;
+                               })"
                                class="w-5 h-5 rounded-lg border-2 border-gray-300 text-[#5F402D]
-                                      focus:ring-[#FCE2CE] focus:ring-offset-0 transition-colors flex-shrink-0">
-                        <span class="text-sm font-medium {{ $todo->status === 'completed' ? 'text-gray-400 line-through' : 'text-gray-700 group-hover:text-[#3E2723]' }} transition-colors">
+                                      focus:ring-[#FCE2CE] focus:ring-offset-0 transition-colors flex-shrink-0 cursor-pointer">
+                        <span class="text-sm font-medium transition-colors"
+                              :class="completed ? 'text-gray-400 line-through' : 'text-gray-700 group-hover:text-[#3E2723]'">
                             {{ $todo->title }}
                         </span>
                     </label>
@@ -254,16 +265,16 @@
                 @endforelse
             </div>
 
-            {{-- Task Summary Footer --}}
+            {{-- Task Summary Footer (reactive) --}}
             <div class="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100">
                 <div class="flex items-center justify-between">
                     <p class="text-xs text-gray-400 font-medium">Completed</p>
-                    <p class="text-xs font-bold text-[#5F402D]">{{ $completedCount }} / {{ $totalTodoCount }}</p>
+                    <p class="text-xs font-bold text-[#5F402D]" x-text="completedCount + ' / ' + totalCount"></p>
                 </div>
                 {{-- Progress Bar --}}
                 <div class="mt-2 w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
                     <div class="h-full bg-[#FCE2CE] rounded-full transition-all duration-500"
-                         style="width: {{ $progressPercent }}%"></div>
+                         :style="'width: ' + (totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0) + '%'"></div>
                 </div>
             </div>
         </div>
