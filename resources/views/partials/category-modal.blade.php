@@ -11,7 +11,7 @@
          class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity z-[100]"></div>
 
     <div class="fixed inset-0 z-[110] w-screen overflow-y-auto">
-        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
             {{-- Panel --}}
             <div x-show="modalOpen"
                  @click.away="closeModal()"
@@ -30,7 +30,7 @@
                     </template>
                     <input type="hidden" name="type" :value="categoryType">
 
-                    <div class="bg-white px-8 pb-8 pt-8 relative">
+                    <div class="bg-white px-5 pb-5 pt-6 sm:px-8 sm:pb-8 sm:pt-8 relative">
                         {{-- Close --}}
                         <button type="button" @click="closeModal()" class="absolute top-6 right-6 p-2 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors">
                             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -40,18 +40,18 @@
 
                         <div class="flex flex-col items-center">
                             {{-- Header Icon --}}
-                            <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-[#FCE2CE] to-[#F5D0B0] flex items-center justify-center shadow-sm mb-5">
-                                <svg class="w-8 h-8 text-[#5F402D]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#FCE2CE] to-[#F5D0B0] flex items-center justify-center shadow-sm mb-3 sm:mb-5">
+                                <svg class="w-6 h-6 sm:w-8 sm:h-8 text-[#5F402D]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
                                 </svg>
                             </div>
 
-                            <h3 class="text-2xl font-extrabold text-[#3E2723] tracking-tight" id="category-modal-title" style="font-family: 'Poppins', sans-serif;"
+                            <h3 class="text-lg sm:text-2xl font-extrabold text-[#3E2723] tracking-tight" id="category-modal-title" style="font-family: 'Poppins', sans-serif;"
                                 x-text="isEditing ? 'Edit Category' : 'New Category'"></h3>
                             <p class="text-sm text-gray-500 mt-1" x-text="isEditing ? 'Update the details below' : 'Create a custom category'"></p>
 
-                            <div class="mt-8 space-y-5 text-left w-full">
+                            <div class="mt-5 sm:mt-8 space-y-4 sm:space-y-5 text-left w-full">
                                 {{-- Emoji Icon Input --}}
                                 <div>
                                     <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Icon</label>
@@ -63,7 +63,7 @@
                                         <span class="text-xs text-gray-400 mr-0.5">Quick pick:</span>
                                         <template x-for="e in ['💰','💼','🎉','🍔','🚗','📄','🎮','🛍️','🏠','💊','📚','✈️']" :key="e">
                                             <button type="button" @click="form.icon = e"
-                                                    class="w-8 h-8 rounded-xl text-base hover:bg-[#FCE2CE]/50 hover:scale-110 transition-all duration-150 flex items-center justify-center"
+                                                class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl text-sm sm:text-base hover:bg-[#FCE2CE]/50 hover:scale-110 transition-all duration-150 flex items-center justify-center"
                                                     :class="form.icon === e ? 'bg-[#FCE2CE] ring-2 ring-[#F5D0B0] scale-110' : 'bg-gray-100/60'"
                                                     x-text="e">
                                             </button>
@@ -91,7 +91,7 @@
                     </div>
 
                     {{-- Actions --}}
-                    <div class="bg-gray-50/80 px-8 py-6 sm:flex sm:flex-row-reverse sm:px-8 border-t border-gray-100/80">
+                    <div class="bg-gray-50/80 px-5 py-4 sm:px-8 sm:py-6 sm:flex sm:flex-row-reverse border-t border-gray-100/80">
                         <button type="submit"
                                 class="inline-flex w-full justify-center items-center gap-2 rounded-2xl bg-[#3E2723] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/20 hover:bg-[#2A1A18] hover:-translate-y-0.5 sm:ml-3 sm:w-auto transition-all focus:ring-4 focus:ring-[#FCE2CE]/80"
                                 x-text="isEditing ? 'Update Category' : 'Save Category'">
