@@ -61,11 +61,11 @@
             <div class="px-3 sm:px-4 py-2.5 sm:py-3 space-y-1.5 max-h-[400px] overflow-y-auto">
                 @forelse($incomeCategories as $cat)
                     <div class="group flex items-center justify-between px-4 py-3 rounded-2xl hover:bg-[#FEF6EF] transition-all duration-200">
-                        <div class="flex items-center gap-3">
-                            <span class="text-xl leading-none">{{ $cat->icon }}</span>
-                            <span class="text-sm font-semibold text-[#3E2723]">{{ $cat->name }}</span>
+                        <div class="flex items-center gap-3 flex-1 min-w-0 pr-2">
+                            <span class="text-xl leading-none flex-shrink-0">{{ $cat->icon }}</span>
+                            <span class="text-sm font-semibold text-[#3E2723] truncate">{{ $cat->name }}</span>
                         </div>
-                        <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <div class="flex items-center gap-1 opacity-100 pointer-events-auto md:opacity-0 md:pointer-events-none md:group-hover:opacity-100 md:group-hover:pointer-events-auto md:transition-all md:duration-200">
                             {{-- Edit Button --}}
                             <button @click="openEditModal({{ $cat->id }}, '{{ addslashes($cat->name) }}', '{{ $cat->icon }}')"
                                     class="p-2 rounded-xl text-gray-400 hover:text-amber-600 hover:bg-amber-50 transition-all duration-200" title="Edit">
@@ -127,11 +127,11 @@
             <div class="px-4 py-3 space-y-1.5 max-h-[400px] overflow-y-auto">
                 @forelse($expenseCategories as $cat)
                     <div class="group flex items-center justify-between px-4 py-3 rounded-2xl hover:bg-[#FEF6EF] transition-all duration-200">
-                        <div class="flex items-center gap-3">
-                            <span class="text-xl leading-none">{{ $cat->icon }}</span>
-                            <span class="text-sm font-semibold text-[#3E2723]">{{ $cat->name }}</span>
+                        <div class="flex items-center gap-3 flex-1 min-w-0 pr-2">
+                            <span class="text-xl leading-none flex-shrink-0">{{ $cat->icon }}</span>
+                            <span class="text-sm font-semibold text-[#3E2723] truncate">{{ $cat->name }}</span>
                         </div>
-                        <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <div class="flex items-center gap-1 opacity-100 pointer-events-auto md:opacity-0 md:pointer-events-none md:group-hover:opacity-100 md:group-hover:pointer-events-auto md:transition-all md:duration-200">
                             {{-- Edit Button --}}
                             <button @click="openEditModal({{ $cat->id }}, '{{ addslashes($cat->name) }}', '{{ $cat->icon }}')"
                                     class="p-2 rounded-xl text-gray-400 hover:text-amber-600 hover:bg-amber-50 transition-all duration-200" title="Edit">
