@@ -41,6 +41,72 @@ Dibangun dengan **Laravel 12**, **Tailwind CSS v4**, dan **Alpine.js**, aplikasi
 
 ---
 
+## 📸 Demo Aplikasi
+
+Berikut adalah tampilan dari setiap halaman yang ada di MyLife OS:
+
+### 🏠 Landing Page
+Halaman utama yang menyambut pengguna dengan desain modern dan CTA untuk memulai.
+
+<p align="center">
+  <img src="public/assets/screenshots/welcome.png" width="100%" alt="Landing Page" style="border-radius: 12px;">
+</p>
+
+---
+
+### 🔑 Login & Register
+
+<table>
+  <tr>
+    <td width="50%">
+      <p align="center"><strong>Halaman Login</strong></p>
+      <img src="public/assets/screenshots/login.png" width="100%" alt="Login Page">
+    </td>
+    <td width="50%">
+      <p align="center"><strong>Halaman Register</strong></p>
+      <img src="public/assets/screenshots/register.png" width="100%" alt="Register Page">
+    </td>
+  </tr>
+</table>
+
+---
+
+### 📊 Dashboard
+Dashboard utama menampilkan ringkasan keuangan bulanan, transaksi terakhir, dan daftar tugas hari ini.
+
+<p align="center">
+  <img src="public/assets/screenshots/dashboard.png" width="100%" alt="Dashboard Page" style="border-radius: 12px;">
+</p>
+
+---
+
+### 💰 Transactions
+Halaman pencatatan transaksi pemasukan dan pengeluaran beserta tombol aksi cepat.
+
+<p align="center">
+  <img src="public/assets/screenshots/transactions.png" width="100%" alt="Transactions Page" style="border-radius: 12px;">
+</p>
+
+---
+
+### ✅ To-Do List
+Kelola tugas harian dengan status, prioritas, dan progress tracking.
+
+<p align="center">
+  <img src="public/assets/screenshots/todo.png" width="100%" alt="To-Do List Page" style="border-radius: 12px;">
+</p>
+
+---
+
+### ⚙️ Settings
+Kustomisasi kategori pemasukan dan pengeluaran dengan emoji icon.
+
+<p align="center">
+  <img src="public/assets/screenshots/settings.png" width="100%" alt="Settings Page" style="border-radius: 12px;">
+</p>
+
+---
+
 ## 🚀 Fitur Utama
 
 ### 🔐 Autentikasi
