@@ -2,7 +2,7 @@
 
 @section('title', 'To-Do List')
 @section('page-title', 'To-Do List')
-@section('page-subtitle', 'Organize your tasks & goals')
+@section('page-subtitle', 'Atur tugas dan target harianmu')
 
 @section('content')
 
@@ -26,7 +26,7 @@
             <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
                 My To-Do List
             </h2>
-            <p class="text-sm text-gray-400 mt-0.5">Stay productive and organized</p>
+            <p class="text-sm text-gray-400 mt-0.5">Tetap produktif dan terorganisir</p>
         </div>
 
         {{-- Add Task Button --}}
@@ -37,7 +37,7 @@
             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
-            Add Task
+            Tambah Tugas
         </button>
     </div>
 
@@ -52,10 +52,10 @@
 
         {{-- List Header --}}
         <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-100">
-            <p class="text-sm font-semibold text-gray-500">All Tasks</p>
+            <p class="text-sm font-semibold text-gray-500">Semua Tugas</p>
             <span class="text-xs font-bold text-[#5F402D] bg-[#FCE2CE]/50 px-3 py-1 rounded-full"
-                  x-text="totalCount + ' ' + (totalCount === 1 ? 'task' : 'tasks')">
-                {{ $totalCount }} {{ Str::plural('task', $totalCount) }}
+                  x-text="totalCount + ' tugas'">
+                {{ $totalCount }} tugas
             </span>
         </div>
 
@@ -163,7 +163,7 @@
             {{-- Summary Footer (reactive) --}}
             <div class="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100">
                 <div class="flex items-center justify-between">
-                    <p class="text-xs text-gray-400 font-medium">Completed</p>
+                    <p class="text-xs text-gray-400 font-medium">Selesai</p>
                     <p class="text-xs font-bold text-[#5F402D]" x-text="completedCount + ' / ' + totalCount"></p>
                 </div>
                 {{-- Progress Bar --}}
@@ -184,10 +184,10 @@
 
                 {{-- Text --}}
                 <h3 class="text-lg font-bold text-[#3E2723] mb-2" style="font-family: 'Poppins', sans-serif;">
-                    No Tasks Yet
+                    Belum Ada Tugas
                 </h3>
                 <p class="text-sm text-gray-400 text-center max-w-sm leading-relaxed">
-                    Start adding tasks to stay organized and productive. Your to-do list will appear here.
+                    Yuk, mulai tambahkan tugas untuk tetap produktif. To-Do List-mu akan muncul di sini.
                 </p>
 
                 {{-- Decorative dots --}}

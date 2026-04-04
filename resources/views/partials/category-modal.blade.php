@@ -48,19 +48,19 @@
                             </div>
 
                             <h3 class="text-lg sm:text-2xl font-extrabold text-[#3E2723] tracking-tight" id="category-modal-title" style="font-family: 'Poppins', sans-serif;"
-                                x-text="isEditing ? 'Edit Category' : 'New Category'"></h3>
-                            <p class="text-sm text-gray-500 mt-1" x-text="isEditing ? 'Update the details below' : 'Create a custom category'"></p>
+                                x-text="isEditing ? 'Edit Kategori' : 'Kategori Baru'"></h3>
+                            <p class="text-sm text-gray-500 mt-1" x-text="isEditing ? 'Perbarui detail kategorimu' : 'Buat kategori kustommu sendiri'"></p>
 
                             <div class="mt-5 sm:mt-8 space-y-4 sm:space-y-5 text-left w-full">
                                 {{-- Emoji Icon Input --}}
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Icon</label>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Ikon</label>
                                     <input type="text" name="icon" x-model="form.icon" required maxlength="10"
-                                           placeholder="Paste an emoji here"
+                                           placeholder="Tempel emoji di sini"
                                            class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3.5 px-5 text-2xl text-center placeholder:text-gray-400 placeholder:text-sm hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm">
                                     {{-- Quick Pick Emoji Row --}}
                                     <div class="flex items-center gap-1.5 mt-2.5 ml-1 flex-wrap">
-                                        <span class="text-xs text-gray-400 mr-0.5">Quick pick:</span>
+                                        <span class="text-xs text-gray-400 mr-0.5">Pilih cepat:</span>
                                         <template x-for="e in ['💰','💼','🎉','🍔','🚗','📄','🎮','🛍️','🏠','💊','📚','✈️']" :key="e">
                                             <button type="button" @click="form.icon = e"
                                                 class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl text-sm sm:text-base hover:bg-[#FCE2CE]/50 hover:scale-110 transition-all duration-150 flex items-center justify-center"
@@ -73,9 +73,9 @@
 
                                 {{-- Category Name Input --}}
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Name</label>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Nama</label>
                                     <input type="text" name="name" x-model="form.name" required maxlength="50"
-                                           placeholder="Salary, Food, Transport..."
+                                           placeholder="Gaji, Makan, Transport..."
                                            class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3.5 px-5 text-gray-900 text-sm font-medium placeholder:text-gray-400 hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm">
                                 </div>
 
@@ -83,8 +83,8 @@
                                 <div x-show="form.icon || form.name" x-transition
                                      class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#FEF6EF] border border-[#FCE2CE]/40">
                                     <span class="text-xl leading-none" x-text="form.icon || '❓'"></span>
-                                    <span class="text-sm font-semibold text-[#3E2723]" x-text="form.name || 'Category name'"></span>
-                                    <span class="ml-auto text-[10px] font-medium text-gray-400 uppercase tracking-wide">Preview</span>
+                                    <span class="text-sm font-semibold text-[#3E2723]" x-text="form.name || 'Nama kategori'"></span>
+                                    <span class="ml-auto text-[10px] font-medium text-gray-400 uppercase tracking-wide">Pratinjau</span>
                                 </div>
                             </div>
                         </div>
@@ -94,11 +94,11 @@
                     <div class="bg-gray-50/80 px-5 py-4 sm:px-8 sm:py-6 sm:flex sm:flex-row-reverse border-t border-gray-100/80">
                         <button type="submit"
                                 class="inline-flex w-full justify-center items-center gap-2 rounded-2xl bg-[#3E2723] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/20 hover:bg-[#2A1A18] hover:-translate-y-0.5 sm:ml-3 sm:w-auto transition-all focus:ring-4 focus:ring-[#FCE2CE]/80"
-                                x-text="isEditing ? 'Update Category' : 'Save Category'">
+                                x-text="isEditing ? 'Perbarui Kategori' : 'Simpan Kategori'">
                         </button>
                         <button type="button" @click="closeModal()"
                                 class="mt-3 inline-flex w-full justify-center items-center rounded-2xl bg-white px-8 py-3.5 text-sm font-bold text-gray-700 shadow-sm border border-gray-200 hover:bg-gray-50 hover:text-gray-900 sm:mt-0 sm:w-auto transition-all">
-                            Cancel
+                            Batal
                         </button>
                     </div>
                 </form>

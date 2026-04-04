@@ -40,7 +40,7 @@ class TodoController extends Controller
             'status'   => 'pending', // Default status
         ]);
 
-        return back()->with('success', 'Task added!');
+        return back()->with('success', 'Tugas berhasil ditambahkan!');
     }
 
     /**
@@ -78,7 +78,7 @@ class TodoController extends Controller
             'due_date' => $validated['due_date'],
         ]);
 
-        return back()->with('success', 'Task updated successfully!');
+        return back()->with('success', 'Tugas berhasil diperbarui!');
     }
 
     /**
@@ -90,6 +90,6 @@ class TodoController extends Controller
 
         $todo->delete();
 
-        return back()->with('success', 'Task deleted successfully!');
+        return back()->with('success', 'Tugas berhasil dihapus!');
     }
 }

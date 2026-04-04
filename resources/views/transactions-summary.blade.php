@@ -2,7 +2,7 @@
 
 @section('title', 'Financial Reports')
 @section('page-title', 'Financial Reports')
-@section('page-subtitle', 'Your transaction summary grouped by time')
+@section('page-subtitle', 'Ringkasan transaksimu berdasarkan periode')
 
 @section('content')
 
@@ -12,7 +12,7 @@
         <svg class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
-        Back to Transactions
+        Kembali ke Transactions
     </a>
 
     @if(count($groupedTransactions) > 0)
@@ -88,7 +88,7 @@
 
                             {{-- Net Balance --}}
                             <div class="flex items-center justify-between pt-3">
-                                <span class="text-xs font-semibold text-gray-400">Net Balance</span>
+                                <span class="text-xs font-semibold text-gray-400">Saldo Bersih</span>
                                 <span class="text-sm font-extrabold {{ $netBalance >= 0 ? 'text-emerald-600' : 'text-red-500' }}">
                                     {{ $netBalance >= 0 ? '+' : '-' }}Rp {{ number_format(abs($netBalance), 0, ',', '.') }}
                                 </span>
@@ -108,10 +108,10 @@
                 </svg>
             </div>
             <h3 class="text-lg font-bold text-[#3E2723] mb-2" style="font-family: 'Poppins', sans-serif;">
-                No Reports Yet
+                Belum Ada Laporan
             </h3>
             <p class="text-sm text-gray-400 text-center max-w-sm leading-relaxed">
-                Start adding transactions to see your monthly and yearly financial summaries here.
+                Mulai tambahkan transaksi untuk melihat ringkasan keuangan bulanan dan tahunanmu di sini.
             </p>
             <div class="flex items-center gap-1.5 mt-8">
                 <div class="w-2 h-2 rounded-full bg-[#FCE2CE]"></div>

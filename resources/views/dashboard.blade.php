@@ -2,7 +2,7 @@
 
 @section('title', 'Dashboard')
 @section('page-title', 'Dashboard')
-@section('page-subtitle', 'Welcome back, ' . (Auth::user()->name ?? 'User') . '!')
+@section('page-subtitle', 'Selamat datang kembali, ' . (Auth::user()->name ?? 'User') . '!')
 
 @section('content')
 
@@ -17,7 +17,7 @@
                 <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
                     📊 Financial Overview
                 </h2>
-                <p class="text-sm text-gray-400 mt-0.5">Your monthly summary at a glance</p>
+                <p class="text-sm text-gray-400 mt-0.5">Ringkasan keuanganmu bulan ini</p>
             </div>
 
             {{-- Quick Action Buttons --}}
@@ -57,7 +57,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500 font-medium leading-tight">Income This Month</p>
+                    <p class="text-sm text-gray-500 font-medium leading-tight">Income Bulan Ini</p>
                     <p class="text-xs text-gray-400">Pemasukan</p>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500 font-medium leading-tight">Expense This Month</p>
+                    <p class="text-sm text-gray-500 font-medium leading-tight">Expense Bulan Ini</p>
                     <p class="text-xs text-gray-400">Pengeluaran</p>
                 </div>
             </div>
@@ -94,9 +94,9 @@
     {{-- Section Header: Dashboard Activity --}}
     <div class="mt-12 mb-6">
         <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-            📋 Dashboard Activity
+            📋 Aktivitas Terkini
         </h2>
-        <p class="text-sm text-gray-400 mt-0.5">Recent transactions and today's tasks</p>
+        <p class="text-sm text-gray-400 mt-0.5">Transaksi terbaru dan tugas hari ini</p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -112,12 +112,12 @@
                         </svg>
                     </div>
                     <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                        Recent Activity
+                        Aktivitas Terakhir
                     </h3>
                 </div>
                 <a href="{{ route('transactions') }}"
                    class="text-sm font-semibold text-[#5F402D] hover:text-[#3E2723] transition-colors flex items-center gap-1">
-                    View All
+                    Lihat Semua
                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                     </svg>
@@ -143,7 +143,7 @@
                                         @endif
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-sm font-semibold text-[#3E2723] truncate">{{ $transaction->description ?: 'No description' }}</p>
+                                        <p class="text-sm font-semibold text-[#3E2723] truncate">{{ $transaction->description ?: 'Tanpa deskripsi' }}</p>
                                         <p class="text-xs text-gray-400 mt-0.5">{{ $transaction->date->format('d M') }}</p>
                                     </div>
                                 </div>
@@ -161,10 +161,10 @@
                     <table class="w-full">
                         <thead>
                             <tr class="text-left">
-                                <th class="px-6 py-3.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Date</th>
-                                <th class="px-6 py-3.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Description</th>
-                                <th class="px-6 py-3.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Category</th>
-                                <th class="px-6 py-3.5 text-xs font-semibold text-gray-400 uppercase tracking-wider text-right">Amount</th>
+                                <th class="px-6 py-3.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Tanggal</th>
+                                <th class="px-6 py-3.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Deskripsi</th>
+                                <th class="px-6 py-3.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Kategori</th>
+                                <th class="px-6 py-3.5 text-xs font-semibold text-gray-400 uppercase tracking-wider text-right">Jumlah</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-50">
@@ -185,7 +185,7 @@
                                         @else
                                             <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
                                                          bg-gray-50 text-gray-500 border border-gray-200/60">
-                                                Uncategorized
+                                                Tanpa Kategori
                                             </span>
                                         @endif
                                     </td>
@@ -202,7 +202,7 @@
             @else
                 {{-- Empty state --}}
                 <div class="px-4 sm:px-6 py-12 text-center">
-                    <p class="text-sm text-gray-400">No transactions yet. Start tracking your finances!</p>
+                    <p class="text-sm text-gray-400">Belum ada transaksi. Yuk, mulai catat keuanganmu!</p>
                 </div>
             @endif
         </div>
@@ -223,12 +223,12 @@
                         </svg>
                     </div>
                     <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                        Today's Tasks
+                        Tugas Hari Ini
                     </h3>
                 </div>
                 <a href="{{ route('todo') }}"
                    class="text-sm font-semibold text-[#5F402D] hover:text-[#3E2723] transition-colors flex items-center gap-1">
-                    All
+                    Semua
                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                     </svg>
@@ -260,7 +260,7 @@
                     </label>
                 @empty
                     <div class="py-8 text-center">
-                        <p class="text-sm text-gray-400">No tasks yet. Add one to get started!</p>
+                        <p class="text-sm text-gray-400">Belum ada tugas hari ini. Yuk, tambahkan satu!</p>
                     </div>
                 @endforelse
             </div>
@@ -268,7 +268,7 @@
             {{-- Task Summary Footer (reactive) --}}
             <div class="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100">
                 <div class="flex items-center justify-between">
-                    <p class="text-xs text-gray-400 font-medium">Completed</p>
+                    <p class="text-xs text-gray-400 font-medium">Selesai</p>
                     <p class="text-xs font-bold text-[#5F402D]" x-text="completedCount + ' / ' + totalCount"></p>
                 </div>
                 {{-- Progress Bar --}}

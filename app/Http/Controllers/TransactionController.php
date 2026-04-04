@@ -93,6 +93,6 @@ class TransactionController extends Controller
 
         Auth::user()->transactions()->create($validated);
 
-        return back()->with('success', 'Transaction added!');
+        return back()->with('success', 'Transaksi berhasil ditambahkan!');
     }
 }

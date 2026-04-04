@@ -119,7 +119,7 @@
                                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
-                                Profile
+                                Profil
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -127,7 +127,7 @@
                                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                     </svg>
-                                    Log Out
+                                    Keluar
                                 </button>
                             </form>
                         </div>
@@ -176,7 +176,7 @@
                         <h1 class="text-4xl font-extrabold text-[#3E2723] tracking-tight" style="font-family: 'Poppins', sans-serif;">
                             @yield('page-title', 'Dashboard')
                         </h1>
-                        <p class="text-base font-medium text-gray-500 mt-1">@yield('page-subtitle', 'Welcome back, ' . (Auth::user()->name ?? 'User') . '!')</p>
+                        <p class="text-base font-medium text-gray-500 mt-1">@yield('page-subtitle', 'Selamat datang kembali, ' . (Auth::user()->name ?? 'User') . '!')</p>
                     </div>
 
                     {{-- Right Side: Date Widget --}}
@@ -312,14 +312,14 @@
                                 </div>
                                 <div class="mt-3 sm:mt-5 text-center w-full">
                                     <h3 class="text-lg sm:text-2xl font-extrabold text-[#3E2723] tracking-tight" id="modal-title" style="font-family: 'Poppins', sans-serif;" 
-                                        x-text="transactionType === 'income' ? 'Add Income' : 'Add Expense'">
+                                        x-text="transactionType === 'income' ? 'Tambah Income' : 'Tambah Expense'">
                                     </h3>
-                                    <p class="text-sm text-gray-500 mt-1" x-text="transactionType === 'income' ? 'Record your new earnings' : 'Record a new spending'"></p>
+                                    <p class="text-sm text-gray-500 mt-1" x-text="transactionType === 'income' ? 'Catat pemasukan barumu' : 'Catat pengeluaran barumu'"></p>
                                     
                                     <div class="mt-5 sm:mt-8 space-y-4 sm:space-y-5 text-left">
                                         <!-- Amount -->
                                         <div>
-                                            <label for="amount" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Amount</label>
+                                            <label for="amount" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Jumlah</label>
                                             <div class="relative">
                                                 <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
                                                     <span class="text-gray-500 font-semibold text-base">Rp</span>
@@ -333,17 +333,17 @@
                                         <div class="grid grid-cols-2 gap-4">
                                             <!-- Date -->
                                             <div>
-                                                <label for="date" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Date</label>
+                                                <label for="date" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Tanggal</label>
                                                 <input type="date" name="date" id="date" required value="{{ date('Y-m-d') }}"
                                                        class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer">
                                             </div>
 
                                             <!-- Category -->
                                             <div class="relative">
-                                                <label for="category" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Category</label>
+                                                <label for="category" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Kategori</label>
                                                 <select name="category_id" id="category" required
                                                         class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer outline-none appearance-none pr-10 relative">
-                                                    <option value="" disabled selected>Select...</option>
+                                                    <option value="" disabled selected>Pilih...</option>
                                                     <!-- Income Categories (Dynamic) -->
                                                     <template x-if="transactionType === 'income'">
                                                         <optgroup label="Income">
@@ -374,8 +374,8 @@
                                         
                                         <!-- Description -->
                                         <div>
-                                            <label for="description" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Description <span class="text-xs font-normal text-gray-400 ml-1">(Optional)</span></label>
-                                            <input type="text" name="description" id="description" placeholder="What is this for?"
+                                            <label for="description" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Deskripsi <span class="text-xs font-normal text-gray-400 ml-1">(Opsional)</span></label>
+                                            <input type="text" name="description" id="description" placeholder="Untuk keperluan apa?"
                                                    class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3.5 px-5 text-gray-900 text-sm font-medium placeholder:text-gray-400 hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm">
                                         </div>
                                     </div>
@@ -385,11 +385,11 @@
                         <div class="bg-gray-50/80 px-5 py-4 sm:px-8 sm:py-6 sm:flex sm:flex-row-reverse border-t border-gray-100/80">
                             <button type="submit" 
                                     class="inline-flex w-full justify-center items-center gap-2 rounded-2xl bg-[#3E2723] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/20 hover:bg-[#2A1A18] hover:-translate-y-0.5 sm:ml-3 sm:w-auto transition-all focus:ring-4 focus:ring-[#FCE2CE]/80"
-                                    x-text="transactionType === 'income' ? 'Save Income' : 'Save Expense'">
+                                    x-text="transactionType === 'income' ? 'Simpan Income' : 'Simpan Expense'">
                             </button>
                             <button type="button" @click="transactionModalOpen = false"
                                     class="mt-3 inline-flex w-full justify-center items-center rounded-2xl bg-white px-8 py-3.5 text-sm font-bold text-gray-700 shadow-sm border border-gray-200 hover:bg-gray-50 hover:text-gray-900 sm:mt-0 sm:w-auto transition-all">
-                                Cancel
+                                Batal
                             </button>
                         </div>
                     </form>
@@ -445,14 +445,14 @@
                                 </div>
                                 <div class="mt-3 sm:mt-5 text-center w-full">
                                     <h3 class="text-lg sm:text-2xl font-extrabold text-[#3E2723] tracking-tight" id="modal-title" style="font-family: 'Poppins', sans-serif;">
-                                        Add New Task
+                                        Tambah Tugas Baru
                                     </h3>
-                                    <p class="text-sm text-gray-500 mt-1">What do you want to achieve?</p>
+                                    <p class="text-sm text-gray-500 mt-1">Apa yang ingin kamu capai?</p>
                                     
                                     <div class="mt-5 sm:mt-8 space-y-4 sm:space-y-5 text-left">
                                         <!-- Title -->
                                         <div>
-                                            <label for="title" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Task Title</label>
+                                            <label for="title" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Judul Tugas</label>
                                             <input type="text" name="title" id="title" required placeholder="Contoh: Kerjakan tugas presentasi"
                                                    class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3.5 px-5 text-gray-900 text-sm font-medium placeholder:text-gray-400 hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm">
                                         </div>
@@ -460,7 +460,7 @@
                                         <div class="grid grid-cols-2 gap-4">
                                             <!-- Priority -->
                                             <div class="relative">
-                                                <label for="priority" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Priority</label>
+                                                <label for="priority" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Prioritas</label>
                                                 <select name="priority" id="priority" required
                                                         class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer outline-none appearance-none pr-10 relative">
                                                     <option value="low">Low</option>
@@ -475,7 +475,7 @@
                                             
                                             <!-- Due Date -->
                                             <div>
-                                                <label for="due_date" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Due Date <span class="text-xs font-normal text-gray-400 ml-0.5">(Opt)</span></label>
+                                                <label for="due_date" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Tenggat <span class="text-xs font-normal text-gray-400 ml-0.5">(Ops)</span></label>
                                                 <input type="date" name="due_date" id="due_date"
                                                        class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold placeholder:text-gray-400 hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer">
                                             </div>
@@ -487,11 +487,11 @@
                         <div class="bg-gray-50/80 px-5 py-4 sm:px-8 sm:py-6 sm:flex sm:flex-row-reverse border-t border-gray-100/80">
                             <button type="submit" 
                                     class="inline-flex w-full justify-center items-center gap-2 rounded-2xl bg-[#3E2723] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/20 hover:bg-[#2A1A18] hover:-translate-y-0.5 sm:ml-3 sm:w-auto transition-all focus:ring-4 focus:ring-[#FCE2CE]/80">
-                                Save Task
+                                Simpan Tugas
                             </button>
                             <button type="button" @click="todoModalOpen = false"
                                     class="mt-3 inline-flex w-full justify-center items-center rounded-2xl bg-white px-8 py-3.5 text-sm font-bold text-gray-700 shadow-sm border border-gray-200 hover:bg-gray-50 hover:text-gray-900 sm:mt-0 sm:w-auto transition-all">
-                                Cancel
+                                Batal
                             </button>
                         </div>
                     </form>
@@ -548,14 +548,14 @@
                                 </div>
                                 <div class="mt-3 sm:mt-5 text-center w-full">
                                     <h3 class="text-lg sm:text-2xl font-extrabold text-[#3E2723] tracking-tight" id="edit-todo-modal-title" style="font-family: 'Poppins', sans-serif;">
-                                        Edit Task
+                                        Edit Tugas
                                     </h3>
-                                    <p class="text-sm text-gray-500 mt-1">Update your task details</p>
+                                    <p class="text-sm text-gray-500 mt-1">Perbarui detail tugasmu</p>
 
                                     <div class="mt-5 sm:mt-8 space-y-4 sm:space-y-5 text-left">
                                         <!-- Title -->
                                         <div>
-                                            <label for="edit_title" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Task Title</label>
+                                            <label for="edit_title" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Judul Tugas</label>
                                             <input type="text" name="title" id="edit_title" required
                                                    :value="editTodoTitle"
                                                    class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3.5 px-5 text-gray-900 text-sm font-medium placeholder:text-gray-400 hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm">
@@ -564,7 +564,7 @@
                                         <div class="grid grid-cols-2 gap-4">
                                             <!-- Priority -->
                                             <div class="relative">
-                                                <label for="edit_priority" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Priority</label>
+                                                <label for="edit_priority" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Prioritas</label>
                                                 <select name="priority" id="edit_priority" required
                                                         x-model="editTodoPriority"
                                                         class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer outline-none appearance-none pr-10 relative">
@@ -579,7 +579,7 @@
 
                                             <!-- Due Date -->
                                             <div>
-                                                <label for="edit_due_date" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Due Date <span class="text-xs font-normal text-gray-400 ml-0.5">(Opt)</span></label>
+                                                <label for="edit_due_date" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Tenggat <span class="text-xs font-normal text-gray-400 ml-0.5">(Ops)</span></label>
                                                 <input type="date" name="due_date" id="edit_due_date"
                                                        :value="editTodoDueDate"
                                                        class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold placeholder:text-gray-400 hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer">
@@ -592,11 +592,11 @@
                         <div class="bg-gray-50/80 px-5 py-4 sm:px-8 sm:py-6 sm:flex sm:flex-row-reverse border-t border-gray-100/80">
                             <button type="submit"
                                     class="inline-flex w-full justify-center items-center gap-2 rounded-2xl bg-[#3E2723] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/20 hover:bg-[#2A1A18] hover:-translate-y-0.5 sm:ml-3 sm:w-auto transition-all focus:ring-4 focus:ring-[#FCE2CE]/80">
-                                Update Task
+                                Perbarui Tugas
                             </button>
                             <button type="button" @click="editTodoModalOpen = false"
                                     class="mt-3 inline-flex w-full justify-center items-center rounded-2xl bg-white px-8 py-3.5 text-sm font-bold text-gray-700 shadow-sm border border-gray-200 hover:bg-gray-50 hover:text-gray-900 sm:mt-0 sm:w-auto transition-all">
-                                Cancel
+                                Batal
                             </button>
                         </div>
                     </form>
@@ -642,11 +642,11 @@
                             </div>
                             <!-- Title -->
                             <h3 class="text-xl font-bold text-[#3E2723]" id="delete-modal-title" style="font-family: 'Poppins', sans-serif;">
-                                Delete Task
+                                Hapus Tugas
                             </h3>
                             <!-- Description -->
                             <p class="text-sm text-gray-500 mt-2 leading-relaxed">
-                                Are you sure you want to delete this task? This cannot be undone.
+                                Apakah kamu yakin ingin menghapus tugas ini? Tindakan ini tidak dapat dibatalkan.
                             </p>
                         </div>
                     </div>
@@ -655,14 +655,14 @@
                     <div class="px-5 pb-5 pt-3 sm:px-8 sm:pb-8 sm:pt-4 flex items-center justify-center gap-3">
                         <button type="button" @click="deleteModalOpen = false"
                                 class="flex-1 inline-flex justify-center items-center rounded-2xl bg-gray-100 px-6 py-3 text-sm font-bold text-gray-600 hover:bg-gray-200 transition-all">
-                            Cancel
+                            Batal
                         </button>
                         <form :action="taskToDeleteUrl" method="POST" class="flex-1">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
                                     class="w-full inline-flex justify-center items-center rounded-2xl bg-red-500 px-6 py-3 text-sm font-bold text-white hover:bg-red-600 shadow-sm hover:shadow-md transition-all">
-                                Delete
+                                Hapus
                             </button>
                         </form>
                     </div>

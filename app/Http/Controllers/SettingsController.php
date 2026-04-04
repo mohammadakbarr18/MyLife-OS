@@ -34,7 +34,7 @@ class SettingsController extends Controller
 
         Auth::user()->categories()->create($validated);
 
-        return back()->with('success', 'Category created successfully!');
+        return back()->with('success', 'Kategori berhasil dibuat!');
     }
 
     /**
@@ -54,7 +54,7 @@ class SettingsController extends Controller
 
         $category->update($validated);
 
-        return back()->with('success', 'Category updated successfully!');
+        return back()->with('success', 'Kategori berhasil diperbarui!');
     }
 
     /**
@@ -69,6 +69,6 @@ class SettingsController extends Controller
 
         $category->delete();
 
-        return back()->with('success', 'Category deleted successfully!');
+        return back()->with('success', 'Kategori berhasil dihapus!');
     }
 }

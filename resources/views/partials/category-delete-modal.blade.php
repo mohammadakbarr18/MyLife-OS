@@ -29,13 +29,13 @@
                         </div>
                         {{-- Title --}}
                         <h3 class="text-xl font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                            Delete Category
+                            Hapus Kategori
                         </h3>
                         {{-- Description --}}
                         <p class="text-sm text-gray-500 mt-2 leading-relaxed">
-                            Are you sure you want to delete
+                            Apakah kamu yakin ingin menghapus
                             <span class="font-semibold text-[#3E2723]" x-text="deleteTarget.icon + ' ' + deleteTarget.name"></span>?
-                            This cannot be undone.
+                            Tindakan ini tidak dapat dibatalkan.
                         </p>
                     </div>
                 </div>
@@ -44,11 +44,11 @@
                 <div class="px-5 pb-5 pt-3 sm:px-8 sm:pb-8 sm:pt-4 flex items-center justify-center gap-3">
                     <button type="button" @click="closeDeleteModal()"
                             class="flex-1 inline-flex justify-center items-center rounded-2xl bg-gray-100 px-6 py-3 text-sm font-bold text-gray-600 hover:bg-gray-200 transition-all">
-                        Cancel
+                        Batal
                     </button>
                     <button type="button" @click="confirmDelete()"
                             class="flex-1 inline-flex justify-center items-center rounded-2xl bg-red-500 px-6 py-3 text-sm font-bold text-white hover:bg-red-600 shadow-sm hover:shadow-md transition-all">
-                        Delete
+                        Hapus
                     </button>
                 </div>
             </div>

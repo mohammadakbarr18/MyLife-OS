@@ -2,7 +2,7 @@
 
 @section('title', 'Transactions')
 @section('page-title', 'Transactions')
-@section('page-subtitle', 'Manage your income & expenses')
+@section('page-subtitle', 'Kelola pemasukan & pengeluaranmu')
 
 @section('content')
 
@@ -21,9 +21,9 @@
         {{-- Text --}}
         <div class="flex-1 min-w-0">
             <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                Monthly & Yearly Reports
+                Laporan Bulanan & Tahunan
             </h3>
-            <p class="text-sm text-gray-400 mt-0.5">View your income and expense summaries grouped by month.</p>
+            <p class="text-sm text-gray-400 mt-0.5">Lihat ringkasan pemasukan dan pengeluaranmu per bulan.</p>
         </div>
         {{-- Arrow --}}
         <div class="flex-shrink-0 text-gray-300 group-hover:text-[#5F402D] group-hover:translate-x-1 transition-all duration-300">
@@ -36,9 +36,9 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
             <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                Transactions History
+                Riwayat Transactions
             </h2>
-            <p class="text-sm text-gray-400 mt-0.5">Track all your income and expenses</p>
+            <p class="text-sm text-gray-400 mt-0.5">Pantau semua pemasukan dan pengeluaranmu</p>
         </div>
 
         {{-- Action Buttons --}}
@@ -87,7 +87,7 @@
                                 </div>
                                 {{-- Text --}}
                                 <div class="min-w-0">
-                                    <p class="text-sm font-semibold text-[#3E2723] truncate">{{ $transaction->description ?: 'No description' }}</p>
+                                    <p class="text-sm font-semibold text-[#3E2723] truncate">{{ $transaction->description ?: 'Tanpa deskripsi' }}</p>
                                     <div class="flex items-center gap-2 mt-1">
                                         @if($transaction->category)
                                             <span class="text-xs text-gray-500">{{ $transaction->category->name }}</span>
@@ -117,11 +117,11 @@
                 <table class="w-full">
                     <thead>
                         <tr class="text-left border-b border-gray-100">
-                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Date</th>
-                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Description</th>
-                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Category</th>
-                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Type</th>
-                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider text-right">Amount</th>
+                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Tanggal</th>
+                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Deskripsi</th>
+                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Kategori</th>
+                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Tipe</th>
+                            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider text-right">Jumlah</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-50">
@@ -142,7 +142,7 @@
                                     @else
                                         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
                                                      bg-gray-50 text-gray-500 border border-gray-200/60">
-                                            Uncategorized
+                                            Tanpa Kategori
                                         </span>
                                     @endif
                                 </td>
@@ -181,10 +181,10 @@
 
                 {{-- Text --}}
                 <h3 class="text-lg font-bold text-[#3E2723] mb-2" style="font-family: 'Poppins', sans-serif;">
-                    No Transactions Yet
+                    Belum Ada Transaksi
                 </h3>
                 <p class="text-sm text-gray-400 text-center max-w-sm leading-relaxed">
-                    Start tracking your finances by adding your first income or expense transaction.
+                    Yuk, mulai catat keuanganmu dengan menambahkan transaksi Income atau Expense pertamamu.
                 </p>
 
                 {{-- Decorative dots --}}

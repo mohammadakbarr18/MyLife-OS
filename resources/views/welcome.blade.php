@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MyLife OS — Organize Your Life, Effortlessly</title>
-    <meta name="description" content="MyLife OS is your personal operating system for clarity. Organize tasks, track habits, and achieve your goals — all in one beautiful place.">
+    <title>MyLife OS — Sistem Operasi untuk Kehidupanmu</title>
+    <meta name="description" content="MyLife OS adalah sistem operasi pribadi untuk mengelola seluruh kehidupan sehari-harimu — keuangan, tugas, jadwal, dan masih banyak lagi. Semua dalam satu tempat yang rapi dan elegan.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,21 +61,21 @@
                     <!-- Badge -->
                     <div class="animate-fade-up inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-[#FCE2CE] rounded-full px-4 py-1.5 mb-6 shadow-sm">
                         <span class="w-2 h-2 bg-[#FCE2CE] rounded-full"></span>
-                        <span class="text-xs font-semibold text-[#3E2723] tracking-wide uppercase">Your Personal OS</span>
+                        <span class="text-xs font-semibold text-[#3E2723] tracking-wide uppercase">Your Life, One System</span>
                     </div>
 
                     <!-- H1 Headline -->
                     <h1 class="animate-fade-up-delay text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-[#3E2723] leading-tight tracking-tight" style="font-family: 'Poppins', sans-serif;">
-                        Organize Your Life,
+                        Hidupmu, Satu
                         <span class="relative inline-block">
-                            <span class="relative z-10">Effortlessly.</span>
+                            <span class="relative z-10">Kendali.</span>
                             <span class="absolute bottom-1 left-0 w-full h-3 lg:h-4 bg-[#FCE2CE]/60 rounded-full -z-0"></span>
                         </span>
                     </h1>
 
                     <!-- Sub-headline -->
                     <p class="animate-fade-up-delay-2 mt-5 lg:mt-6 text-base sm:text-lg lg:text-xl text-[#5F402D]/80 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                        The all-in-one personal dashboard to track your tasks, habits, and goals — designed for clarity, built for focus.
+                        Kelola keuangan, tugas harian, jadwal, dan seluruh aspek kehidupanmu dari satu tempat. Simpel, terstruktur, dan terus berkembang.
                     </p>
 
                     <!-- CTA Buttons -->
@@ -83,7 +83,7 @@
                         <!-- Primary CTA -->
                         <a href="{{ route('register') }}" id="cta-register"
                            class="group inline-flex items-center gap-2 bg-[#FCE2CE] text-[#3E2723] font-bold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:bg-[#fdd5b8] transition-all duration-300 transform hover:scale-[1.03] active:scale-[0.98]">
-                            Get Started
+                            Mulai Sekarang
                             <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
@@ -95,7 +95,7 @@
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                             </svg>
-                            Sign In
+                            Masuk
                         </a>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
 
         <!-- Scroll indicator -->
         <div class="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-[#3E2723]/30 animate-fade-up-delay-3">
-            <span class="text-xs font-medium tracking-widest uppercase">Discover</span>
+            <span class="text-xs font-medium tracking-widest uppercase">Jelajahi</span>
             <svg class="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
             </svg>
@@ -138,51 +138,51 @@
 
             <!-- Section Header -->
             <div class="text-center mb-14 lg:mb-20">
-                <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#5F402D]/60 mb-3">Why MyLife OS?</span>
+                <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#5F402D]/60 mb-3">Apa yang Bisa Dilakukan?</span>
                 <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#3E2723] leading-tight" style="font-family: 'Poppins', sans-serif;">
-                    Everything you need,<br class="hidden sm:block"> nothing you don't.
+                    Bukan sekadar aplikasi,<br class="hidden sm:block"> ini sistem hidup teraturmu.
                 </h2>
             </div>
 
             <!-- Feature Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
 
-                <!-- Feature 1: Organize -->
+                <!-- Feature 1 -->
                 <div class="group bg-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg border border-[#FCE2CE]/30 hover:border-[#FCE2CE] transition-all duration-300 hover:-translate-y-1">
                     <div class="w-14 h-14 bg-[#FCE2CE]/40 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FCE2CE]/60 transition-colors duration-300">
                         <svg class="w-7 h-7 text-[#3E2723]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-[#3E2723] mb-3" style="font-family: 'Poppins', sans-serif;">Organize</h3>
+                    <h3 class="text-xl font-bold text-[#3E2723] mb-3" style="font-family: 'Poppins', sans-serif;">Kelola Keuangan</h3>
                     <p class="text-[#5F402D]/70 leading-relaxed">
-                        Keep your tasks, notes, and priorities perfectly sorted. A clean workspace for a clear mind.
+                        Catat pemasukan dan pengeluaran, buat kategori sendiri, dan pantau ringkasan keuanganmu secara berkala.
                     </p>
                 </div>
 
-                <!-- Feature 2: Track -->
+                <!-- Feature 2 -->
                 <div class="group bg-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg border border-[#FCE2CE]/30 hover:border-[#FCE2CE] transition-all duration-300 hover:-translate-y-1">
                     <div class="w-14 h-14 bg-[#FCE2CE]/40 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FCE2CE]/60 transition-colors duration-300">
                         <svg class="w-7 h-7 text-[#3E2723]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-[#3E2723] mb-3" style="font-family: 'Poppins', sans-serif;">Track</h3>
+                    <h3 class="text-xl font-bold text-[#3E2723] mb-3" style="font-family: 'Poppins', sans-serif;">Atur Aktivitas</h3>
                     <p class="text-[#5F402D]/70 leading-relaxed">
-                        Monitor your progress with beautiful insights. See your habits, goals, and finances at a glance.
+                        Buat to-do list, atur prioritas, dan jadwalkan kegiatanmu agar hari-harimu lebih produktif dan terarah.
                     </p>
                 </div>
 
-                <!-- Feature 3: Achieve -->
+                <!-- Feature 3 -->
                 <div class="group bg-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg border border-[#FCE2CE]/30 hover:border-[#FCE2CE] transition-all duration-300 hover:-translate-y-1">
                     <div class="w-14 h-14 bg-[#FCE2CE]/40 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FCE2CE]/60 transition-colors duration-300">
                         <svg class="w-7 h-7 text-[#3E2723]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0l-4.725 2.885a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-[#3E2723] mb-3" style="font-family: 'Poppins', sans-serif;">Achieve</h3>
+                    <h3 class="text-xl font-bold text-[#3E2723] mb-3" style="font-family: 'Poppins', sans-serif;">Pantau Semuanya</h3>
                     <p class="text-[#5F402D]/70 leading-relaxed">
-                        Turn your ambitions into reality. Stay consistent, stay motivated, and celebrate every win.
+                        Lihat ringkasan seluruh hidupmu dari satu dashboard. Fitur terus bertambah sesuai kebutuhanmu.
                     </p>
                 </div>
             </div>
@@ -198,8 +198,8 @@
                 &copy; {{ date('Y') }} MyLife OS. Built with <span class="text-[#FCE2CE]">&hearts;</span> and vibe.
             </p>
             <div class="flex items-center gap-6">
-                <a href="{{ route('login') }}" class="text-sm text-[#3E2723]/50 hover:text-[#3E2723] font-medium transition-colors">Sign In</a>
-                <a href="{{ route('register') }}" class="text-sm text-[#3E2723]/50 hover:text-[#3E2723] font-medium transition-colors">Create Account</a>
+                <a href="{{ route('login') }}" class="text-sm text-[#3E2723]/50 hover:text-[#3E2723] font-medium transition-colors">Masuk</a>
+                <a href="{{ route('register') }}" class="text-sm text-[#3E2723]/50 hover:text-[#3E2723] font-medium transition-colors">Buat Akun</a>
             </div>
         </div>
     </footer>

@@ -32,7 +32,7 @@ class AuthController extends Controller
             $user->categories()->create($category);
         }
 
-        return redirect()->route('login')->with('status', 'Registration successful! Please log in.');
+        return redirect()->route('login')->with('status', 'Pendaftaran berhasil! Silakan masuk.');
     }
 
     /**
@@ -52,7 +52,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email atau password yang kamu masukkan salah.',
         ])->onlyInput('email');
     }
 
