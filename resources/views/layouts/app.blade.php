@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#FEF6EF] font-sans text-[#424242] antialiased overflow-x-hidden"
-      x-data="{ transactionModalOpen: false, transactionType: 'income', todoModalOpen: false, editTodoModalOpen: false, editTodoId: null, editTodoTitle: '', editTodoPriority: 'medium', editTodoDueDate: '', deleteModalOpen: false, taskToDeleteUrl: '' }">
+      x-data="{ transactionModalOpen: false, transactionType: 'income', todoModalOpen: false, editTodoModalOpen: false, editTodoId: null, editTodoTitle: '', editTodoPriority: 'medium', editTodoDueDate: '', deleteModalOpen: false, taskToDeleteUrl: '', scheduleModalOpen: false, scheduleModalMode: 'add', scheduleEditId: null, scheduleTitle: '', scheduleIcon: '☕', scheduleDate: '', scheduleStartTime: '', scheduleEndTime: '', scheduleNote: '', deleteScheduleModalOpen: false, scheduleToDeleteUrl: '' }">
 
     <div class="min-h-screen flex">
 
@@ -66,6 +66,16 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                     </svg>
                     To-Do List
+                </a>
+
+                <!-- Schedule -->
+                <a href="{{ route('schedule.index') }}"
+                   class="sidebar-link group flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-200
+                          {{ request()->routeIs('schedule*') ? 'bg-[#FCE2CE] text-[#5F402D] shadow-sm' : 'text-gray-500 hover:bg-[#FEF6EF] hover:text-[#5F402D]' }}">
+                    <svg class="w-5 h-5 transition-colors {{ request()->routeIs('schedule*') ? 'text-[#5F402D]' : 'text-gray-400 group-hover:text-[#5F402D]' }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Schedule
                 </a>
 
                 <!-- Settings -->
@@ -242,6 +252,18 @@
                     </svg>
                 </div>
                 <span class="text-[10px] font-semibold">To-Do</span>
+            </a>
+
+            <!-- Schedule -->
+            <a href="{{ route('schedule.index') }}"
+               class="flex flex-col items-center gap-1 py-1.5 px-3 rounded-2xl transition-all duration-200
+                      {{ request()->routeIs('schedule*') ? 'text-[#5F402D]' : 'text-gray-400' }}">
+                <div class="p-1.5 rounded-xl transition-colors {{ request()->routeIs('schedule*') ? 'bg-[#FCE2CE]' : '' }}">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <span class="text-[10px] font-semibold">Schedule</span>
             </a>
 
             <!-- Settings -->
@@ -658,6 +680,199 @@
                             Batal
                         </button>
                         <form :action="taskToDeleteUrl" method="POST" class="flex-1">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="w-full inline-flex justify-center items-center rounded-2xl bg-red-500 px-6 py-3 text-sm font-bold text-white hover:bg-red-600 shadow-sm hover:shadow-md transition-all">
+                                Hapus
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================================== -->
+    <!-- SCHEDULE ADD/EDIT MODAL -->
+    <!-- ==================================================================== -->
+    <div x-show="scheduleModalOpen" style="display: none;" class="relative z-[100]" aria-labelledby="schedule-modal-title" role="dialog" aria-modal="true">
+        <!-- Background backdrop -->
+        <div x-show="scheduleModalOpen"
+             x-transition:enter="ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                <!-- Modal panel -->
+                <div x-show="scheduleModalOpen"
+                     @click.away="scheduleModalOpen = false"
+                     x-transition:enter="ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95"
+                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave="ease-in duration-200"
+                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave-end="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95"
+                     class="relative transform overflow-hidden rounded-[2rem] bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-[480px] border border-white/60">
+
+                    <form :action="scheduleModalMode === 'edit' ? '/schedule/' + scheduleEditId : '{{ route('schedule.store') }}'" method="POST">
+                        @csrf
+                        <template x-if="scheduleModalMode === 'edit'">
+                            <input type="hidden" name="_method" value="PUT">
+                        </template>
+
+                        <div class="bg-white px-5 pb-5 pt-6 sm:px-8 sm:pb-8 sm:pt-8 relative">
+                            <!-- Close Button -->
+                            <button type="button" @click="scheduleModalOpen = false" class="absolute top-6 right-6 p-2 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors">
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            <div class="sm:flex sm:items-center sm:flex-col">
+                                <!-- Modal Header icon -->
+                                <div class="mx-auto flex h-12 w-12 sm:h-16 sm:w-16 flex-shrink-0 items-center justify-center rounded-2xl sm:rounded-3xl sm:mx-0 shadow-sm transition-colors duration-300"
+                                     :class="scheduleModalMode === 'edit' ? 'bg-gradient-to-br from-amber-100 to-amber-50 text-amber-600' : 'bg-gradient-to-br from-[#FCE2CE] to-[#F5D0B0] text-[#5F402D]'">
+                                    <svg class="h-6 w-6 sm:h-8 sm:w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <div class="mt-3 sm:mt-5 text-center w-full">
+                                    <h3 class="text-lg sm:text-2xl font-extrabold text-[#3E2723] tracking-tight" id="schedule-modal-title" style="font-family: 'Poppins', sans-serif;"
+                                        x-text="scheduleModalMode === 'edit' ? 'Edit Jadwal' : 'Tambah Jadwal Baru'">
+                                    </h3>
+                                    <p class="text-sm text-gray-500 mt-1" x-text="scheduleModalMode === 'edit' ? 'Perbarui detail jadwalmu' : 'Atur kegiatan baru di harimu'"></p>
+
+                                    <div class="mt-5 sm:mt-8 space-y-4 sm:space-y-5 text-left">
+                                        <!-- Activity Name & Icon Grid -->
+                                        <div class="grid grid-cols-[1fr_auto] gap-3">
+                                            <!-- Title -->
+                                            <div>
+                                                <label for="schedule_title" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Nama Kegiatan</label>
+                                                <input type="text" name="title" id="schedule_title" required placeholder="Contoh: Coding Session"
+                                                       x-model="scheduleTitle"
+                                                       class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3.5 px-5 text-gray-900 text-sm font-medium placeholder:text-gray-400 hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm">
+                                            </div>
+                                            <!-- Icon -->
+                                            <div>
+                                                <label for="schedule_icon" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Icon</label>
+                                                <input type="text" name="icon" id="schedule_icon" required maxlength="10" placeholder="☕"
+                                                       x-model="scheduleIcon"
+                                                       class="block w-[4.5rem] rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3.5 px-3 text-center text-2xl hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm">
+                                            </div>
+                                        </div>
+
+                                        <!-- Date -->
+                                        <div>
+                                            <label for="schedule_date" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Tanggal</label>
+                                            <input type="date" name="date" id="schedule_date" required
+                                                   x-model="scheduleDate"
+                                                   class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer">
+                                        </div>
+
+                                        <!-- Time Grid -->
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <!-- Start Time -->
+                                            <div>
+                                                <label for="schedule_start" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Jam Mulai</label>
+                                                <input type="time" name="start_time" id="schedule_start" required
+                                                       x-model="scheduleStartTime"
+                                                       class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer">
+                                            </div>
+                                            <!-- End Time -->
+                                            <div>
+                                                <label for="schedule_end" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Jam Selesai</label>
+                                                <input type="time" name="end_time" id="schedule_end" required
+                                                       x-model="scheduleEndTime"
+                                                       class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer">
+                                            </div>
+                                        </div>
+
+                                        <!-- Note -->
+                                        <div>
+                                            <label for="schedule_note" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Catatan <span class="text-xs font-normal text-gray-400 ml-1">(Opsional)</span></label>
+                                            <input type="text" name="note" id="schedule_note" placeholder="Tambahkan catatan..."
+                                                   x-model="scheduleNote"
+                                                   class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3.5 px-5 text-gray-900 text-sm font-medium placeholder:text-gray-400 hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50/80 px-5 py-4 sm:px-8 sm:py-6 sm:flex sm:flex-row-reverse border-t border-gray-100/80">
+                            <button type="submit"
+                                    class="inline-flex w-full justify-center items-center gap-2 rounded-2xl bg-[#3E2723] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/20 hover:bg-[#2A1A18] hover:-translate-y-0.5 sm:ml-3 sm:w-auto transition-all focus:ring-4 focus:ring-[#FCE2CE]/80"
+                                    x-text="scheduleModalMode === 'edit' ? 'Perbarui Jadwal' : 'Simpan Jadwal'">
+                            </button>
+                            <button type="button" @click="scheduleModalOpen = false"
+                                    class="mt-3 inline-flex w-full justify-center items-center rounded-2xl bg-white px-8 py-3.5 text-sm font-bold text-gray-700 shadow-sm border border-gray-200 hover:bg-gray-50 hover:text-gray-900 sm:mt-0 sm:w-auto transition-all">
+                                Batal
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================================== -->
+    <!-- DELETE SCHEDULE CONFIRMATION MODAL -->
+    <!-- ==================================================================== -->
+    <div x-show="deleteScheduleModalOpen" style="display: none;" class="relative z-[100]" aria-labelledby="delete-schedule-modal-title" role="dialog" aria-modal="true">
+        <!-- Background backdrop -->
+        <div x-show="deleteScheduleModalOpen"
+             x-transition:enter="ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                <!-- Modal panel -->
+                <div x-show="deleteScheduleModalOpen"
+                     @click.away="deleteScheduleModalOpen = false"
+                     x-transition:enter="ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95"
+                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave="ease-in duration-200"
+                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave-end="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95"
+                     class="relative transform overflow-hidden rounded-[2rem] bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-[400px] border border-white/60">
+
+                    <div class="bg-white px-5 pb-4 pt-6 sm:px-8 sm:pb-6 sm:pt-8">
+                        <div class="flex flex-col items-center text-center">
+                            <!-- Red Trash Icon -->
+                            <div class="flex h-12 w-12 sm:h-16 sm:w-16 flex-shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-red-50 mb-3 sm:mb-5">
+                                <svg class="h-6 w-6 sm:h-8 sm:w-8 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                </svg>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-xl font-bold text-[#3E2723]" id="delete-schedule-modal-title" style="font-family: 'Poppins', sans-serif;">
+                                Hapus Jadwal
+                            </h3>
+                            <!-- Description -->
+                            <p class="text-sm text-gray-500 mt-2 leading-relaxed">
+                                Apakah kamu yakin ingin menghapus jadwal ini? Tindakan ini tidak dapat dibatalkan.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="px-5 pb-5 pt-3 sm:px-8 sm:pb-8 sm:pt-4 flex items-center justify-center gap-3">
+                        <button type="button" @click="deleteScheduleModalOpen = false"
+                                class="flex-1 inline-flex justify-center items-center rounded-2xl bg-gray-100 px-6 py-3 text-sm font-bold text-gray-600 hover:bg-gray-200 transition-all">
+                            Batal
+                        </button>
+                        <form :action="scheduleToDeleteUrl" method="POST" class="flex-1">
                             @csrf
                             @method('DELETE')
                             <button type="submit"

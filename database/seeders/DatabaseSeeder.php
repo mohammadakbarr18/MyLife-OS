@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Schedule;
 use App\Models\Todo;
 use App\Models\Transaction;
 use App\Models\User;
@@ -55,5 +56,13 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         $this->command->info("✅ 5 Todos seeded (3 pending, 2 completed)");
+
+        // Seed 7 daily schedules
+        Schedule::factory()
+            ->count(7)
+            ->for($user)
+            ->create();
+
+        $this->command->info("✅ 7 Schedules seeded");
     }
 }
