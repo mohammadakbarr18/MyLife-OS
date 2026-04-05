@@ -96,7 +96,7 @@
         <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
             📋 Aktivitas Terkini
         </h2>
-        <p class="text-sm text-gray-400 mt-0.5">Transaksi terbaru dan tugas hari ini</p>
+        <p class="text-sm text-gray-400 mt-0.5">Transaksi terbaru, tugas, dan jadwal hari ini</p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -279,6 +279,123 @@
             </div>
         </div>
 
+    </div>
+
+    {{-- ============================================================== --}}
+    {{-- SECTION 3: TODAY'S SCHEDULE WIDGET                             --}}
+    {{-- ============================================================== --}}
+
+    <div class="mt-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100/50 overflow-hidden">
+            {{-- Widget Header --}}
+            <div class="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-[#FCE2CE] flex items-center justify-center">
+                        <svg class="w-4.5 h-4.5 text-[#5F402D]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
+                            Jadwal Hari Ini
+                        </h3>
+                        <p class="text-xs text-gray-400 mt-0.5">{{ now()->translatedFormat('l, d F Y') }}</p>
+                    </div>
+                </div>
+                <a href="{{ route('schedule.index') }}"
+                   class="text-sm font-semibold text-[#5F402D] hover:text-[#3E2723] transition-colors flex items-center gap-1">
+                    Buka Planner
+                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg>
+                </a>
+            </div>
+
+            {{-- Schedule Timeline --}}
+            @if($todaySchedules->isNotEmpty())
+                <div class="px-4 sm:px-6 py-4 sm:py-5">
+                    <div class="relative">
+                        {{-- Vertical Line --}}
+                        <div class="absolute left-[15px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-[#FCE2CE] via-[#F5D0B0]/50 to-[#FCE2CE]/20 rounded-full"></div>
+
+                        {{-- Schedule Items --}}
+                        <div class="space-y-1">
+                            @foreach($todaySchedules as $schedule)
+                                @php
+                                    $sStartHHMM = $schedule->start_time instanceof \Carbon\Carbon
+                                        ? $schedule->start_time->format('H:i')
+                                        : \Carbon\Carbon::parse($schedule->start_time)->format('H:i');
+                                    $sEndHHMM = $schedule->end_time instanceof \Carbon\Carbon
+                                        ? $schedule->end_time->format('H:i')
+                                        : \Carbon\Carbon::parse($schedule->end_time)->format('H:i');
+                                    $sIsOvernight = $sEndHHMM < $sStartHHMM;
+                                @endphp
+                                <div class="relative flex items-center gap-3 pl-1 py-2.5 rounded-xl hover:bg-[#FEF6EF]/50 transition-colors duration-150 group">
+                                    {{-- Dot --}}
+                                    <div class="relative z-10 flex-shrink-0">
+                                        <div class="w-[10px] h-[10px] rounded-full bg-[#FCE2CE] border-[2.5px] border-[#F5D0B0]/80 group-hover:border-[#5F402D]/40 group-hover:scale-125 transition-all duration-300"></div>
+                                    </div>
+
+                                    {{-- Icon --}}
+                                    <div class="flex-shrink-0 w-9 h-9 rounded-xl bg-[#FEF6EF] group-hover:bg-[#FCE2CE]/50 flex items-center justify-center text-lg transition-colors duration-200">
+                                        {{ $schedule->icon }}
+                                    </div>
+
+                                    {{-- Content --}}
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-semibold text-gray-700 truncate group-hover:text-[#3E2723] transition-colors">{{ $schedule->title }}</p>
+                                        <p class="text-xs text-gray-400 mt-0.5 flex items-center gap-1">
+                                            {{ $sStartHHMM }} — {{ $sEndHHMM }}
+                                            @if($sIsOvernight)
+                                                <span class="inline-flex items-center gap-0.5 text-[9px] font-bold text-orange-500 bg-orange-50 px-1 py-0.5 rounded border border-orange-100/60">
+                                                    🌙 +1
+                                                </span>
+                                            @endif
+                                        </p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Footer --}}
+                <div class="px-4 sm:px-6 py-3 border-t border-gray-100">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs text-gray-400 font-medium">Total kegiatan</p>
+                        <p class="text-xs font-bold text-[#5F402D]">{{ $todaySchedules->count() }} jadwal</p>
+                    </div>
+                </div>
+            @else
+                {{-- Beautiful Empty State --}}
+                <div class="flex flex-col items-center justify-center py-14 px-4 sm:px-6">
+                    <div class="w-16 h-16 rounded-2xl bg-[#FCE2CE]/30 flex items-center justify-center mb-5">
+                        <svg class="w-8 h-8 text-[#5F402D]/30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-base font-bold text-[#3E2723] mb-1.5" style="font-family: 'Poppins', sans-serif;">Hari Ini Masih Kosong</h4>
+                    <p class="text-sm text-gray-400 text-center max-w-xs leading-relaxed mb-5">
+                        Belum ada jadwal untuk hari ini. Rencanakan harimu lewat Daily Planner!
+                    </p>
+                    <a href="{{ route('schedule.index') }}"
+                       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-semibold
+                              bg-[#FCE2CE] text-[#5F402D] border border-[#F5D0B0]
+                              hover:bg-[#F5D0B0] hover:shadow-sm transition-all duration-200">
+                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        Buka Planner
+                    </a>
+                    {{-- Decorative dots --}}
+                    <div class="flex items-center gap-1.5 mt-6">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#FCE2CE]"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#FCE2CE]/60"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#FCE2CE]/30"></div>
+                    </div>
+                </div>
+            @endif
+        </div>
     </div>
 
 @endsection

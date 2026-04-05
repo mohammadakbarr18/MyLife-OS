@@ -145,9 +145,9 @@
             </div>
 
             <!-- Feature Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8">
 
-                <!-- Feature 1 -->
+                <!-- Feature 1: Kelola Keuangan -->
                 <div class="group bg-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg border border-[#FCE2CE]/30 hover:border-[#FCE2CE] transition-all duration-300 hover:-translate-y-1">
                     <div class="w-14 h-14 bg-[#FCE2CE]/40 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FCE2CE]/60 transition-colors duration-300">
                         <svg class="w-7 h-7 text-[#3E2723]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -160,7 +160,7 @@
                     </p>
                 </div>
 
-                <!-- Feature 2 -->
+                <!-- Feature 2: To-Do List -->
                 <div class="group bg-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg border border-[#FCE2CE]/30 hover:border-[#FCE2CE] transition-all duration-300 hover:-translate-y-1">
                     <div class="w-14 h-14 bg-[#FCE2CE]/40 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FCE2CE]/60 transition-colors duration-300">
                         <svg class="w-7 h-7 text-[#3E2723]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -169,11 +169,24 @@
                     </div>
                     <h3 class="text-xl font-bold text-[#3E2723] mb-3" style="font-family: 'Poppins', sans-serif;">Atur Aktivitas</h3>
                     <p class="text-[#5F402D]/70 leading-relaxed">
-                        Buat to-do list, atur prioritas, dan jadwalkan kegiatanmu agar hari-harimu lebih produktif dan terarah.
+                        Buat to-do list, atur prioritas tugas, dan tandai selesai secara real-time agar hari-harimu lebih produktif.
                     </p>
                 </div>
 
-                <!-- Feature 3 -->
+                <!-- Feature 3: Jadwal Harian (Daily Planner) — NEW -->
+                <div class="group bg-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg border border-[#FCE2CE]/30 hover:border-[#FCE2CE] transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-[#FCE2CE]/40 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FCE2CE]/60 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-[#3E2723]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#3E2723] mb-3" style="font-family: 'Poppins', sans-serif;">Jadwal Harian</h3>
+                    <p class="text-[#5F402D]/70 leading-relaxed">
+                        Rencanakan hari dengan time-blocking. Navigasi antar tanggal, dan dukung jadwal lintas tengah malam.
+                    </p>
+                </div>
+
+                <!-- Feature 4: Pantau Semuanya -->
                 <div class="group bg-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg border border-[#FCE2CE]/30 hover:border-[#FCE2CE] transition-all duration-300 hover:-translate-y-1">
                     <div class="w-14 h-14 bg-[#FCE2CE]/40 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FCE2CE]/60 transition-colors duration-300">
                         <svg class="w-7 h-7 text-[#3E2723]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">

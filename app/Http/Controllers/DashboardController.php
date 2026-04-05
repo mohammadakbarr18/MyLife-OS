@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,12 @@ class DashboardController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        // ── Today's Schedules ────────────────────────────────
+        $todaySchedules = $user->schedules()
+            ->whereDate('date', Carbon::today())
+            ->ordered()
+            ->get();
+
         return view('dashboard', compact(
             'incomeThisMonth',
             'expenseThisMonth',
@@ -55,6 +62,7 @@ class DashboardController extends Controller
             'formattedExpense',
             'recentTransactions',
             'todayTodos',
+            'todaySchedules',
         ));
     }
 

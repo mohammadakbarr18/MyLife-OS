@@ -25,7 +25,7 @@
 
 ## 📖 Tentang Project
 
-**MyLife OS** adalah aplikasi web manajemen kehidupan pribadi yang dirancang sebagai *personal operating system* untuk membantu kamu mengatur keuangan, mengelola tugas harian, dan mencapai tujuan hidup — semua dalam satu dashboard yang bersih dan modern.
+**MyLife OS** adalah aplikasi web manajemen kehidupan pribadi yang dirancang sebagai *personal operating system* untuk membantu kamu mengatur keuangan, mengelola tugas harian, merencanakan jadwal, dan mencapai tujuan hidup — semua dalam satu dashboard yang bersih dan modern.
 
 Dibangun dengan **Laravel 12**, **Tailwind CSS v4**, dan **Alpine.js**, aplikasi ini menggabungkan performa tinggi di sisi server dengan antarmuka pengguna yang responsif dan interaktif tanpa memerlukan framework JavaScript yang berat.
 
@@ -33,20 +33,21 @@ Dibangun dengan **Laravel 12**, **Tailwind CSS v4**, dan **Alpine.js**, aplikasi
 
 | | Fitur | Deskripsi |
 |---|---|---|
-| 📊 | **Dashboard Terpusat** | Lihat ringkasan keuangan dan aktivitas terbaru dalam satu halaman |
+| 📊 | **Dashboard Terpusat** | Lihat ringkasan keuangan, tugas, dan jadwal hari ini dalam satu halaman |
 | 💰 | **Manajemen Keuangan** | Catat pemasukan & pengeluaran dengan kategori kustom |
 | ✅ | **To-Do List** | Kelola tugas harian dengan prioritas dan deadline |
+| 📅 | **Smart Daily Planner** | Rencanakan hari dengan time-blocking, navigasi tanggal, dan dukungan jadwal melewati tengah malam |
 | ⚙️ | **Pengaturan Fleksibel** | Kustomisasi kategori transaksi dengan emoji icon |
 | 📱 | **Fully Responsive** | Tampilan sempurna di desktop, tablet, dan mobile |
 
 ---
 
-## 📸 Demo Aplikasi
+## 📸 Screenshots / Demo
 
 Berikut adalah tampilan dari setiap halaman yang ada di MyLife OS:
 
 ### 🏠 Landing Page
-Halaman utama yang menyambut pengguna dengan desain modern dan CTA untuk memulai.
+Halaman utama yang menyambut pengguna dengan desain warm minimalist dan CTA untuk memulai.
 
 <p align="center">
   <img src="public/assets/screenshots/welcome.png" width="100%" alt="Landing Page" style="border-radius: 12px;">
@@ -72,7 +73,7 @@ Halaman utama yang menyambut pengguna dengan desain modern dan CTA untuk memulai
 ---
 
 ### 📊 Dashboard
-Dashboard utama menampilkan ringkasan keuangan bulanan, transaksi terakhir, dan daftar tugas hari ini.
+Dashboard utama menampilkan ringkasan keuangan bulanan, widget tugas hari ini, dan jadwal harian dalam satu tampilan.
 
 <p align="center">
   <img src="public/assets/screenshots/dashboard.png" width="100%" alt="Dashboard Page" style="border-radius: 12px;">
@@ -89,11 +90,29 @@ Halaman pencatatan transaksi pemasukan dan pengeluaran beserta tombol aksi cepat
 
 ---
 
+### 📈 Transaction Summary
+Laporan ringkasan keuangan bulanan & tahunan yang dikelompokkan otomatis.
+
+<p align="center">
+  <img src="public/assets/screenshots/transactions-summary.png" width="100%" alt="Transactions Summary Page" style="border-radius: 12px;">
+</p>
+
+---
+
 ### ✅ To-Do List
 Kelola tugas harian dengan status, prioritas, dan progress tracking.
 
 <p align="center">
   <img src="public/assets/screenshots/todo.png" width="100%" alt="To-Do List Page" style="border-radius: 12px;">
+</p>
+
+---
+
+### 📅 Daily Planner / Timeline
+Smart Daily Planner dengan timeline visual, navigasi antar tanggal, indikator "now" real-time, dan dukungan jadwal overnight.
+
+<p align="center">
+  <img src="public/assets/screenshots/schedule.png" width="100%" alt="Daily Planner Page" style="border-radius: 12px;">
 </p>
 
 ---
@@ -119,7 +138,8 @@ Kustomisasi kategori pemasukan dan pengeluaran dengan emoji icon.
 - **Ringkasan Keuangan Bulanan** — Total pemasukan dan pengeluaran bulan ini
 - **Format Rupiah Cerdas** — Otomatis disingkat menjadi format seperti `6,92 Juta` atau `1,5 Miliar`
 - **Transaksi Terakhir** — 5 transaksi terbaru beserta ikon kategori
-- **Daftar Todo** — Semua tugas yang perlu diselesaikan
+- **Daftar Todo** — Semua tugas yang perlu diselesaikan dengan toggle real-time
+- **Jadwal Hari Ini** — Widget mini-timeline yang menampilkan jadwal harian dengan link ke full planner
 
 ### 💰 Manajemen Transaksi
 - Tambah transaksi pemasukan (income) atau pengeluaran (expense)
@@ -134,6 +154,15 @@ Kustomisasi kategori pemasukan dan pengeluaran dengan emoji icon.
 - Edit tugas yang sudah ada melalui modal
 - Hapus tugas dengan konfirmasi modal yang elegan
 - Auto-sort: tugas pending selalu tampil di atas
+
+### 📅 Smart Daily Planner
+- **Time-blocking** — Jadwalkan kegiatan dengan waktu mulai dan selesai yang presisi
+- **Date-based Flexibility** — Navigasi bebas ke tanggal mana pun (kemarin, besok, minggu depan, dll.) via date picker
+- **Overnight Scheduling** — Dukungan penuh untuk jadwal melewati tengah malam (contoh: 22:00 – 02:00), ditandai badge `🌙 +1 Hari`
+- **Real-time Now Indicator** — Badge "NOW" pulse yang otomatis muncul pada kegiatan yang sedang berlangsung
+- **Visual Timeline** — Tampilan vertikal dengan titik indikator state (current / past / future) dan animasi transisi
+- **CRUD Lengkap** — Tambah, edit, dan hapus jadwal via modal interaktif dengan emoji picker
+- **Duration Badge** — Kalkulasi otomatis durasi setiap kegiatan (contoh: 1j 30m)
 
 ### ⚙️ Pengaturan (Settings)
 - Kelola kategori pemasukan dan pengeluaran
@@ -164,12 +193,14 @@ MyLife OS/
 ├── app/
 │   ├── Http/Controllers/
 │   │   ├── AuthController.php          # Autentikasi (login, register, logout)
-│   │   ├── DashboardController.php     # Halaman dashboard & ringkasan keuangan
+│   │   ├── DashboardController.php     # Dashboard, ringkasan keuangan & jadwal hari ini
+│   │   ├── ScheduleController.php      # CRUD daily planner / jadwal harian
 │   │   ├── SettingsController.php      # Manajemen kategori
 │   │   ├── TodoController.php          # CRUD & toggle to-do list
 │   │   └── TransactionController.php   # CRUD transaksi & laporan ringkasan
 │   ├── Models/
 │   │   ├── Category.php                # Model kategori (income/expense)
+│   │   ├── Schedule.php                # Model jadwal harian (daily planner)
 │   │   ├── Todo.php                    # Model tugas/to-do
 │   │   ├── Transaction.php             # Model transaksi keuangan
 │   │   └── User.php                    # Model pengguna
@@ -185,6 +216,7 @@ MyLife OS/
 │       ├── layouts/app.blade.php       # Layout utama + sidebar + modals
 │       ├── partials/                   # Partial views (modals, dll.)
 │       ├── dashboard.blade.php         # Halaman dashboard
+│       ├── schedule.blade.php          # Halaman daily planner / timeline
 │       ├── transactions.blade.php      # Daftar transaksi
 │       ├── transactions-summary.blade.php  # Laporan ringkasan
 │       ├── todo.blade.php              # Halaman to-do list
@@ -298,6 +330,7 @@ erDiagram
     USERS ||--o{ CATEGORIES : has
     USERS ||--o{ TRANSACTIONS : has
     USERS ||--o{ TODOS : has
+    USERS ||--o{ SCHEDULES : has
     CATEGORIES ||--o{ TRANSACTIONS : categorizes
 
     USERS {
@@ -339,6 +372,18 @@ erDiagram
         date due_date "nullable"
         timestamps created_at
     }
+
+    SCHEDULES {
+        bigint id PK
+        bigint user_id FK
+        string title
+        date date
+        time start_time
+        time end_time
+        string icon
+        text note "nullable"
+        timestamps created_at
+    }
 ```
 
 ---
@@ -362,6 +407,10 @@ erDiagram
 | `PATCH` | `/todo/{id}/toggle` | `TodoController@toggle` | Toggle status tugas |
 | `PUT` | `/todo/{id}` | `TodoController@update` | Update tugas |
 | `DELETE` | `/todo/{id}` | `TodoController@destroy` | Hapus tugas |
+| `GET` | `/schedule` | `ScheduleController@index` | Daily Planner (timeline view) |
+| `POST` | `/schedule` | `ScheduleController@store` | Tambah jadwal |
+| `PUT` | `/schedule/{id}` | `ScheduleController@update` | Update jadwal |
+| `DELETE` | `/schedule/{id}` | `ScheduleController@destroy` | Hapus jadwal |
 | `GET` | `/settings` | `SettingsController@index` | Halaman pengaturan |
 | `POST` | `/settings/categories` | `SettingsController@storeCategory` | Tambah kategori |
 | `PUT` | `/settings/categories/{id}` | `SettingsController@updateCategory` | Update kategori |
@@ -386,6 +435,7 @@ MyLife OS menggunakan desain yang **warm, clean, dan modern** dengan palet warna
 - **Glassmorphism** pada elemen-elemen tertentu
 - **Responsive design** — Mobile-first approach
 - **Custom font** — Inter untuk body text, Poppins untuk heading
+- **Real-time timeline** — Indikator "NOW" pulse pada Daily Planner
 
 ---
 
@@ -457,5 +507,5 @@ Project ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/
 </p>
 
 <p align="center">
-  <em>Organize. Track. Achieve.</em>
+  <em>Organize. Track. Schedule. Achieve.</em>
 </p>
