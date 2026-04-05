@@ -79,7 +79,7 @@
                 </a>
 
                 <!-- Settings -->
-                <a href="{{ route('settings') }}"
+                <a href="{{ route('settings.index') }}"
                    class="sidebar-link group flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-200
                           {{ request()->routeIs('settings*') ? 'bg-[#FCE2CE] text-[#5F402D] shadow-sm' : 'text-gray-500 hover:bg-[#FEF6EF] hover:text-[#5F402D]' }}">
                     <svg class="w-5 h-5 transition-colors {{ request()->routeIs('settings*') ? 'text-[#5F402D]' : 'text-gray-400 group-hover:text-[#5F402D]' }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -125,7 +125,7 @@
                              @click.outside="open = false"
                              class="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50"
                              style="display: none;">
-                            <a href="{{ route('settings') }}" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-600 hover:bg-[#FEF6EF] hover:text-[#5F402D] transition-colors">
+                            <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-600 hover:bg-[#FEF6EF] hover:text-[#5F402D] transition-colors">
                                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
@@ -267,7 +267,7 @@
             </a>
 
             <!-- Settings -->
-            <a href="{{ route('settings') }}"
+            <a href="{{ route('settings.index') }}"
                class="flex flex-col items-center gap-1 py-1.5 px-3 rounded-2xl transition-all duration-200
                       {{ request()->routeIs('settings*') ? 'text-[#5F402D]' : 'text-gray-400' }}">
                 <div class="p-1.5 rounded-xl transition-colors {{ request()->routeIs('settings*') ? 'bg-[#FCE2CE]' : '' }}">

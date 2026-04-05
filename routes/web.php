@@ -52,10 +52,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/schedule/{schedule}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
 
     // ========== Settings ==========
-    Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::put('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
+    Route::put('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
     Route::post('/settings/categories', [SettingsController::class, 'storeCategory'])->name('settings.categories.store');
     Route::put('/settings/categories/{category}', [SettingsController::class, 'updateCategory'])->name('settings.categories.update');
     Route::delete('/settings/categories/{category}', [SettingsController::class, 'destroyCategory'])->name('settings.categories.destroy');
 
 });
-

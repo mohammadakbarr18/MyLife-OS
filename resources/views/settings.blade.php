@@ -7,13 +7,16 @@
 @section('content')
 
     {{-- Page Header --}}
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-        <div>
-            <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                Kelola Kategori
-            </h2>
-            <p class="text-sm text-gray-400 mt-0.5">Buat dan kelola kategori Income & Expense-mu</p>
-        </div>
+    <div class="mb-8">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-[#F5D0B0]/60 text-xs font-semibold uppercase tracking-[0.2em] text-[#B77B57] shadow-sm">
+            Settings Hub
+        </span>
+        <h2 class="mt-4 text-2xl font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
+            Kelola akun dan preferensimu
+        </h2>
+        <p class="text-sm text-gray-500 mt-2 max-w-2xl">
+            Perbarui profil, jaga keamanan password, dan atur kategori keuanganmu dalam satu halaman dengan nuansa warm minimalist.
+        </p>
     </div>
 
     {{-- Success Message --}}
@@ -29,6 +32,152 @@
             {{ session('success') }}
         </div>
     @endif
+
+    {{-- Account Settings --}}
+    <div class="space-y-6">
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100/60 overflow-hidden">
+            <div class="px-5 sm:px-6 py-5 border-b border-gray-100/80 flex items-start gap-4 bg-gradient-to-r from-white via-[#FFF9F5] to-[#FEF6EF]">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#FCE2CE] to-[#F7D9C4] flex items-center justify-center shadow-sm flex-shrink-0">
+                    <svg class="w-6 h-6 text-[#8B5E3C]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Profile Information</h3>
+                    <p class="text-sm text-gray-500 mt-1">Update your account&apos;s profile information and email address.</p>
+                </div>
+            </div>
+
+            <form action="{{ route('settings.profile.update') }}" method="POST" class="px-5 sm:px-6 py-5 sm:py-6">
+                @csrf
+                @method('PUT')
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="space-y-2">
+                        <label for="profile_name" class="block text-sm font-semibold text-[#6B4F3A]">Name</label>
+                        <input
+                            id="profile_name"
+                            name="name"
+                            type="text"
+                            value="{{ old('name', auth()->user()->name) }}"
+                            required
+                            autocomplete="name"
+                            class="w-full rounded-[1.5rem] border border-[#F1E3D8] bg-[#FFFBF7] px-4 py-3.5 text-sm font-medium text-[#3E2723] placeholder:text-gray-400 shadow-sm transition-all focus:border-[#F5D0B0] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/60"
+                            placeholder="Your name"
+                        >
+                        <x-input-error :messages="$errors->updateProfile->get('name')" class="ml-1 text-xs" />
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="profile_email" class="block text-sm font-semibold text-[#6B4F3A]">Email</label>
+                        <input
+                            id="profile_email"
+                            name="email"
+                            type="email"
+                            value="{{ old('email', auth()->user()->email) }}"
+                            required
+                            autocomplete="email"
+                            class="w-full rounded-[1.5rem] border border-[#F1E3D8] bg-[#FFFBF7] px-4 py-3.5 text-sm font-medium text-[#3E2723] placeholder:text-gray-400 shadow-sm transition-all focus:border-[#F5D0B0] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/60"
+                            placeholder="you@example.com"
+                        >
+                        <x-input-error :messages="$errors->updateProfile->get('email')" class="ml-1 text-xs" />
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button
+                        type="submit"
+                        class="inline-flex items-center justify-center rounded-2xl bg-[#FCE2CE] px-6 py-3 text-sm font-bold text-[#5F402D] shadow-sm transition-all hover:bg-[#F5D0B0] hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/70"
+                    >
+                        Save Profile
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100/60 overflow-hidden">
+            <div class="px-5 sm:px-6 py-5 border-b border-gray-100/80 flex items-start gap-4 bg-gradient-to-r from-white via-[#FFF9F5] to-[#FEF6EF]">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#FCE2CE] to-[#F5D0B0] flex items-center justify-center shadow-sm flex-shrink-0">
+                    <svg class="w-6 h-6 text-[#8B5E3C]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 0h10.5A2.25 2.25 0 0119.5 12.75v6A2.25 2.25 0 0117.25 21h-10.5A2.25 2.25 0 014.5 18.75v-6A2.25 2.25 0 016.75 10.5z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Update Password</h3>
+                    <p class="text-sm text-gray-500 mt-1">Ensure your account is using a long, random password to stay secure.</p>
+                </div>
+            </div>
+
+            <form action="{{ route('settings.password.update') }}" method="POST" class="px-5 sm:px-6 py-5 sm:py-6">
+                @csrf
+                @method('PUT')
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="space-y-2">
+                        <label for="current_password" class="block text-sm font-semibold text-[#6B4F3A]">Current Password</label>
+                        <input
+                            id="current_password"
+                            name="current_password"
+                            type="password"
+                            required
+                            autocomplete="current-password"
+                            class="w-full rounded-[1.5rem] border border-[#F1E3D8] bg-[#FFFBF7] px-4 py-3.5 text-sm font-medium text-[#3E2723] placeholder:text-gray-400 shadow-sm transition-all focus:border-[#F5D0B0] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/60"
+                            placeholder="Current password"
+                        >
+                        <x-input-error :messages="$errors->updatePassword->get('current_password')" class="ml-1 text-xs" />
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="password" class="block text-sm font-semibold text-[#6B4F3A]">New Password</label>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            required
+                            autocomplete="new-password"
+                            class="w-full rounded-[1.5rem] border border-[#F1E3D8] bg-[#FFFBF7] px-4 py-3.5 text-sm font-medium text-[#3E2723] placeholder:text-gray-400 shadow-sm transition-all focus:border-[#F5D0B0] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/60"
+                            placeholder="New password"
+                        >
+                        <x-input-error :messages="$errors->updatePassword->get('password')" class="ml-1 text-xs" />
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="password_confirmation" class="block text-sm font-semibold text-[#6B4F3A]">Confirm Password</label>
+                        <input
+                            id="password_confirmation"
+                            name="password_confirmation"
+                            type="password"
+                            required
+                            autocomplete="new-password"
+                            class="w-full rounded-[1.5rem] border border-[#F1E3D8] bg-[#FFFBF7] px-4 py-3.5 text-sm font-medium text-[#3E2723] placeholder:text-gray-400 shadow-sm transition-all focus:border-[#F5D0B0] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/60"
+                            placeholder="Confirm password"
+                        >
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button
+                        type="submit"
+                        class="inline-flex items-center justify-center rounded-2xl bg-[#3E2723] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/15 transition-all hover:bg-[#2A1A18] hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/70"
+                    >
+                        Save Password
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr class="my-8 border-gray-200">
+
+    {{-- Category Header --}}
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div>
+            <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
+                Category Management
+            </h2>
+            <p class="text-sm text-gray-400 mt-0.5">Buat dan kelola kategori Income & Expense-mu</p>
+        </div>
+    </div>
 
     {{-- 2-Column Grid --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
