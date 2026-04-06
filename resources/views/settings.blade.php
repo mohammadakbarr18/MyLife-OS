@@ -33,6 +33,16 @@
         </div>
     @endif
 
+    @if(session('error'))
+        <div class="mb-6 px-5 py-3.5 rounded-2xl bg-rose-50 border border-rose-100 text-rose-700 text-sm font-semibold flex items-center gap-3 shadow-sm">
+            <svg class="w-5 h-5 text-rose-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.007v.008H12v-.008z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3.75l8.25 14.25H3.75L12 3.75z" />
+            </svg>
+            {{ session('error') }}
+        </div>
+    @endif
+
     {{-- Account Settings --}}
     <div class="space-y-6">
         <div class="bg-white rounded-3xl shadow-sm border border-gray-100/60 overflow-hidden">
@@ -169,21 +179,16 @@
 
     <hr class="my-8 border-gray-200">
 
-    {{-- Category Header --}}
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-        <div>
-            <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                Category Management
-            </h2>
-            <p class="text-sm text-gray-400 mt-0.5">Buat dan kelola kategori Income & Expense-mu</p>
-        </div>
+    <div class="mb-8">
+        <h3 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Manajemen Kategori Keuangan</h3>
+        <p class="text-sm text-gray-500 mb-4">Atur label kategori untuk mencatat pemasukan dan pengeluaran pada fitur Transactions.</p>
     </div>
 
     {{-- 2-Column Grid --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
         {{-- ======== INCOME CATEGORIES ======== --}}
-        <div x-data="categoryManager('income', {{ $incomeCategories->toJson() }})" class="bg-white rounded-3xl shadow-sm border border-gray-100/50 overflow-hidden">
+        <div x-data="categoryManager('income')" class="bg-white rounded-3xl shadow-sm border border-gray-100/50 overflow-hidden">
             {{-- Card Header --}}
             <div class="px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-100/80 flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -230,6 +235,11 @@
                                 </svg>
                             </button>
                         </div>
+
+                        <form x-ref="deleteForm{{ $cat->id }}" action="{{ route('settings.categories.destroy', $cat) }}" method="POST" class="hidden">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </div>
                 @empty
                     <div class="flex flex-col items-center justify-center py-12 text-gray-400">
@@ -249,7 +259,7 @@
         </div>
 
         {{-- ======== EXPENSE CATEGORIES ======== --}}
-        <div x-data="categoryManager('expense', {{ $expenseCategories->toJson() }})" class="bg-white rounded-3xl shadow-sm border border-gray-100/50 overflow-hidden">
+        <div x-data="categoryManager('expense')" class="bg-white rounded-3xl shadow-sm border border-gray-100/50 overflow-hidden">
             {{-- Card Header --}}
             <div class="px-6 py-5 border-b border-gray-100/80 flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -296,6 +306,11 @@
                                 </svg>
                             </button>
                         </div>
+
+                        <form x-ref="deleteForm{{ $cat->id }}" action="{{ route('settings.categories.destroy', $cat) }}" method="POST" class="hidden">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </div>
                 @empty
                     <div class="flex flex-col items-center justify-center py-12 text-gray-400">
@@ -316,9 +331,84 @@
 
     </div>
 
-    {{-- Alpine.js Category Manager Component --}}
+    <div class="mt-10">
+        <div class="mb-6">
+            <h3 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Prioritas To-Do List</h3>
+            <p class="text-sm text-gray-500 mb-4">Buat dan sesuaikan tingkat prioritas untuk tugas-tugas harianmu.</p>
+        </div>
+
+        <div x-data="priorityManager()" class="bg-white rounded-3xl shadow-sm border border-gray-100/50 overflow-hidden">
+            <div class="px-5 sm:px-6 py-5 border-b border-gray-100/80 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#FCE2CE] to-[#F5D0B0] flex items-center justify-center shadow-sm">
+                        <svg class="w-5 h-5 text-[#8B5E3C]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 3v18l6.75-4.5L18.75 21V3H5.25z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Daftar Prioritas</h3>
+                        <p class="text-xs text-gray-400 mt-0.5">{{ $taskPriorities->count() }} prioritas aktif</p>
+                    </div>
+                </div>
+
+                <button @click="openAddModal()"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FCE2CE]/60 text-[#6B4F3A] text-xs font-bold hover:bg-[#F5D0B0] transition-all duration-200 shadow-sm border border-[#F5D0B0]/60">
+                    <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    Tambah Baru
+                </button>
+            </div>
+
+            <div class="px-4 sm:px-5 py-3 space-y-1.5">
+                @forelse($taskPriorities as $priority)
+                    <div class="group flex items-center justify-between px-4 py-3 rounded-2xl hover:bg-[#FEF6EF] transition-all duration-200">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <span class="w-10 h-10 rounded-2xl border border-gray-200 shadow-sm flex-shrink-0" style="background-color: {{ $priority->color }}"></span>
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-[#3E2723] truncate">{{ $priority->name }}</p>
+                                <p class="text-xs text-gray-400">{{ $priority->color }}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-1 opacity-100 pointer-events-auto md:opacity-0 md:pointer-events-none md:group-hover:opacity-100 md:group-hover:pointer-events-auto md:transition-all md:duration-200">
+                            <button @click="openEditModal({{ $priority->id }}, '{{ addslashes($priority->name) }}', '{{ $priority->color }}')"
+                                    class="p-2 rounded-xl text-gray-400 hover:text-amber-600 hover:bg-amber-50 transition-all duration-200" title="Edit">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                </svg>
+                            </button>
+                            <button @click="openDeleteModal({{ $priority->id }}, '{{ addslashes($priority->name) }}', '{{ $priority->color }}')"
+                                    class="p-2 rounded-xl text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all duration-200" title="Delete">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <form x-ref="deleteForm{{ $priority->id }}" action="{{ route('settings.priorities.destroy', $priority) }}" method="POST" class="hidden">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </div>
+                @empty
+                    <div class="flex flex-col items-center justify-center py-12 text-gray-400">
+                        <svg class="w-10 h-10 mb-3 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 3v18l6.75-4.5L18.75 21V3H5.25z" />
+                        </svg>
+                        <p class="text-sm font-medium">Belum ada prioritas</p>
+                        <p class="text-xs mt-1">Tambahkan prioritas pertama untuk mulai mengelola tugasmu</p>
+                    </div>
+                @endforelse
+            </div>
+
+            @include('partials.priority-modal')
+            @include('partials.priority-delete-modal')
+        </div>
+    </div>
+
     <script>
-        function categoryManager(type, categories) {
+        function categoryManager(type) {
             return {
                 modalOpen: false,
                 isEditing: false,
@@ -378,23 +468,72 @@
                     return '{{ route("settings.categories.store") }}';
                 },
 
-                get deleteAction() {
-                    return '/settings/categories/' + this.deleteTarget.id;
-                },
-
                 get categoryType() {
                     return type;
                 }
             }
         }
-    </script>
 
-    {{-- Hidden delete forms for each category --}}
-    @foreach($incomeCategories->merge($expenseCategories) as $cat)
-        <form x-ref="deleteForm{{ $cat->id }}" action="{{ route('settings.categories.destroy', $cat) }}" method="POST" class="hidden">
-            @csrf
-            @method('DELETE')
-        </form>
-    @endforeach
+        function priorityManager() {
+            return {
+                modalOpen: false,
+                isEditing: false,
+                editId: null,
+                form: {
+                    name: '',
+                    color: '#D97706',
+                },
+                deleteModalOpen: false,
+                deleteTarget: {
+                    id: null,
+                    name: '',
+                    color: '#D97706',
+                },
+
+                openAddModal() {
+                    this.isEditing = false;
+                    this.editId = null;
+                    this.form.name = '';
+                    this.form.color = '#D97706';
+                    this.modalOpen = true;
+                },
+
+                openEditModal(id, name, color) {
+                    this.isEditing = true;
+                    this.editId = id;
+                    this.form.name = name;
+                    this.form.color = color;
+                    this.modalOpen = true;
+                },
+
+                closeModal() {
+                    this.modalOpen = false;
+                },
+
+                openDeleteModal(id, name, color) {
+                    this.deleteTarget.id = id;
+                    this.deleteTarget.name = name;
+                    this.deleteTarget.color = color;
+                    this.deleteModalOpen = true;
+                },
+
+                closeDeleteModal() {
+                    this.deleteModalOpen = false;
+                },
+
+                confirmDelete() {
+                    this.$refs['deleteForm' + this.deleteTarget.id].submit();
+                },
+
+                get formAction() {
+                    if (this.isEditing) {
+                        return '/settings/priorities/' + this.editId;
+                    }
+
+                    return '{{ route("settings.priorities.store") }}';
+                }
+            }
+        }
+    </script>
 
 @endsection

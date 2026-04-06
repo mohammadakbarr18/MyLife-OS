@@ -19,7 +19,7 @@ class Todo extends Model
         'user_id',
         'title',
         'status',
-        'priority',
+        'task_priority_id',
         'due_date',
     ];
 
@@ -41,5 +41,13 @@ class Todo extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the priority assigned to the todo.
+     */
+    public function taskPriority(): BelongsTo
+    {
+        return $this->belongsTo(TaskPriority::class);
     }
 }

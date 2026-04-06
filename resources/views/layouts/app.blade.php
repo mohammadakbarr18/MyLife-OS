@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#FEF6EF] font-sans text-[#424242] antialiased overflow-x-hidden"
-      x-data="{ transactionModalOpen: false, transactionType: 'income', todoModalOpen: false, editTodoModalOpen: false, editTodoId: null, editTodoTitle: '', editTodoPriority: 'medium', editTodoDueDate: '', deleteModalOpen: false, taskToDeleteUrl: '', scheduleModalOpen: false, scheduleModalMode: 'add', scheduleEditId: null, scheduleTitle: '', scheduleIcon: '☕', scheduleDate: '', scheduleStartTime: '', scheduleEndTime: '', scheduleNote: '', deleteScheduleModalOpen: false, scheduleToDeleteUrl: '' }">
+      x-data="{ transactionModalOpen: false, transactionType: 'income', todoModalOpen: false, editTodoModalOpen: false, editTodoId: null, editTodoTitle: '', editTodoPriorityId: '', editTodoDueDate: '', deleteModalOpen: false, taskToDeleteUrl: '', scheduleModalOpen: false, scheduleModalMode: 'add', scheduleEditId: null, scheduleTitle: '', scheduleIcon: '☕', scheduleDate: '', scheduleStartTime: '', scheduleEndTime: '', scheduleNote: '', deleteScheduleModalOpen: false, scheduleToDeleteUrl: '' }">
 
     <div class="min-h-screen flex">
 
@@ -481,18 +481,25 @@
 
                                         <div class="grid grid-cols-2 gap-4">
                                             <!-- Priority -->
-                                            <div class="relative">
-                                                <label for="priority" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Prioritas</label>
-                                                <select name="priority" id="priority" required
-                                                        class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer outline-none appearance-none pr-10 relative">
-                                                    <option value="low">Low</option>
-                                                    <option value="medium" selected>Medium</option>
-                                                    <option value="high">High</option>
-                                                </select>
-                                                <!-- Custom Chevron -->
-                                                <div class="pointer-events-none absolute inset-y-0 right-0 top-7 flex items-center px-4 text-gray-500 w-1/2 justify-end">
-                                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                            <div>
+                                                <label for="task_priority_id" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Prioritas</label>
+                                                <div class="relative">
+                                                    <select name="task_priority_id" id="task_priority_id" required
+                                                            @disabled(($globalTaskPriorities ?? collect())->isEmpty())
+                                                            class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer outline-none appearance-none pr-10">
+                                                        @forelse(($globalTaskPriorities ?? collect()) as $priority)
+                                                            <option value="{{ $priority->id }}" @selected(old('task_priority_id', optional(($globalTaskPriorities ?? collect())->first())->id) == $priority->id)>
+                                                                {{ $priority->name }}
+                                                            </option>
+                                                        @empty
+                                                            <option value="">Belum ada prioritas</option>
+                                                        @endforelse
+                                                    </select>
+                                                    <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-500">
+                                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                    </div>
                                                 </div>
+                                                <p class="mt-2 ml-1 text-[11px] text-gray-400">Kelola daftar prioritas di Settings.</p>
                                             </div>
                                             
                                             <!-- Due Date -->
@@ -585,18 +592,24 @@
 
                                         <div class="grid grid-cols-2 gap-4">
                                             <!-- Priority -->
-                                            <div class="relative">
+                                            <div>
                                                 <label for="edit_priority" class="block text-sm font-bold text-gray-700 mb-2 ml-1">Prioritas</label>
-                                                <select name="priority" id="edit_priority" required
-                                                        x-model="editTodoPriority"
-                                                        class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer outline-none appearance-none pr-10 relative">
-                                                    <option value="low">Low</option>
-                                                    <option value="medium">Medium</option>
-                                                    <option value="high">High</option>
-                                                </select>
-                                                <div class="pointer-events-none absolute inset-y-0 right-0 top-7 flex items-center px-4 text-gray-500 w-1/2 justify-end">
-                                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                <div class="relative">
+                                                    <select name="task_priority_id" id="edit_priority" required
+                                                            x-model="editTodoPriorityId"
+                                                            @disabled(($globalTaskPriorities ?? collect())->isEmpty())
+                                                            class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3 px-4 text-gray-900 text-sm font-semibold hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm cursor-pointer outline-none appearance-none pr-10">
+                                                        @forelse(($globalTaskPriorities ?? collect()) as $priority)
+                                                            <option value="{{ $priority->id }}">{{ $priority->name }}</option>
+                                                        @empty
+                                                            <option value="">Belum ada prioritas</option>
+                                                        @endforelse
+                                                    </select>
+                                                    <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-500">
+                                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                    </div>
                                                 </div>
+                                                <p class="mt-2 ml-1 text-[11px] text-gray-400">Kelola daftar prioritas di Settings.</p>
                                             </div>
 
                                             <!-- Due Date -->

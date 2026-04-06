@@ -1,0 +1,102 @@
+<div x-show="modalOpen" style="display: none;" class="relative z-[100]" aria-labelledby="priority-modal-title" role="dialog" aria-modal="true">
+    <div x-show="modalOpen"
+         x-transition:enter="ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity z-[100]"></div>
+
+    <div class="fixed inset-0 z-[110] w-screen overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+            <div x-show="modalOpen"
+                 @click.away="closeModal()"
+                 x-transition:enter="ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95"
+                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave="ease-in duration-200"
+                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave-end="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95"
+                 class="relative transform overflow-hidden rounded-[2rem] bg-white text-left shadow-2xl transition-all sm:my-8 w-full sm:max-w-[420px] border border-white/60">
+
+                <form :action="formAction" method="POST">
+                    @csrf
+                    <template x-if="isEditing">
+                        <input type="hidden" name="_method" value="PUT">
+                    </template>
+
+                    <div class="bg-white px-5 pb-5 pt-6 sm:px-8 sm:pb-8 sm:pt-8 relative">
+                        <button type="button" @click="closeModal()" class="absolute top-6 right-6 p-2 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#FCE2CE] to-[#F5D0B0] flex items-center justify-center shadow-sm mb-3 sm:mb-5">
+                                <svg class="w-6 h-6 sm:w-8 sm:h-8 text-[#5F402D]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 3v18l6.75-4.5L18.75 21V3H5.25z" />
+                                </svg>
+                            </div>
+
+                            <h3 class="text-lg sm:text-2xl font-extrabold text-[#3E2723] tracking-tight" id="priority-modal-title" style="font-family: 'Poppins', sans-serif;"
+                                x-text="isEditing ? 'Edit Prioritas' : 'Prioritas Baru'"></h3>
+                            <p class="text-sm text-gray-500 mt-1" x-text="isEditing ? 'Perbarui warna dan nama prioritasmu' : 'Buat level prioritas kustom untuk to-do list'"></p>
+
+                            <div class="mt-5 sm:mt-8 space-y-4 sm:space-y-5 text-left w-full">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Nama Prioritas</label>
+                                    <input type="text" name="name" x-model="form.name" required maxlength="50"
+                                           placeholder="Contoh: Level Gila"
+                                           class="block w-full rounded-[1.25rem] bg-gray-50 border border-gray-200/80 py-3.5 px-5 text-gray-900 text-sm font-medium placeholder:text-gray-400 hover:bg-gray-100/50 focus:bg-white focus:ring-4 focus:ring-[#FCE2CE]/50 focus:border-[#FCE2CE] transition-all shadow-sm">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Warna Badge</label>
+                                    <div class="grid grid-cols-[88px_1fr] gap-3 items-center">
+                                        <input type="color" name="color" x-model="form.color"
+                                               class="h-14 w-full rounded-[1.25rem] border border-gray-200/80 bg-gray-50 p-2 shadow-sm cursor-pointer">
+                                        <div class="rounded-[1.25rem] border border-gray-200/80 bg-gray-50 px-4 py-3 shadow-sm">
+                                            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-400">Hex Color</p>
+                                            <p class="mt-1 text-sm font-semibold text-[#3E2723]" x-text="form.color"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center gap-1.5 mt-2.5 ml-1 flex-wrap">
+                                        <span class="text-xs text-gray-400 mr-0.5">Pilihan cepat:</span>
+                                        <template x-for="color in ['#DC2626', '#D97706', '#2563EB', '#16A34A', '#7C3AED', '#EC4899']" :key="color">
+                                            <button type="button" @click="form.color = color"
+                                                    class="w-7 h-7 sm:w-8 sm:h-8 rounded-full border transition-all duration-150"
+                                                    :class="form.color === color ? 'border-[#3E2723] scale-110 shadow-sm' : 'border-white/60'"
+                                                    :style="'background-color: ' + color">
+                                            </button>
+                                        </template>
+                                    </div>
+                                </div>
+
+                                <div x-show="form.name || form.color" x-transition
+                                     class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#FEF6EF] border border-[#FCE2CE]/40">
+                                    <span class="w-3 h-3 rounded-full flex-shrink-0" :style="'background-color: ' + form.color"></span>
+                                    <span class="text-sm font-semibold text-[#3E2723]" x-text="form.name || 'Nama prioritas'"></span>
+                                    <span class="ml-auto text-[10px] font-medium text-gray-400 uppercase tracking-wide">Pratinjau</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50/80 px-5 py-4 sm:px-8 sm:py-6 sm:flex sm:flex-row-reverse border-t border-gray-100/80">
+                        <button type="submit"
+                                class="inline-flex w-full justify-center items-center gap-2 rounded-2xl bg-[#3E2723] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/20 hover:bg-[#2A1A18] hover:-translate-y-0.5 sm:ml-3 sm:w-auto transition-all focus:ring-4 focus:ring-[#FCE2CE]/80"
+                                x-text="isEditing ? 'Perbarui Prioritas' : 'Simpan Prioritas'">
+                        </button>
+                        <button type="button" @click="closeModal()"
+                                class="mt-3 inline-flex w-full justify-center items-center rounded-2xl bg-white px-8 py-3.5 text-sm font-bold text-gray-700 shadow-sm border border-gray-200 hover:bg-gray-50 hover:text-gray-900 sm:mt-0 sm:w-auto transition-all">
+                            Batal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

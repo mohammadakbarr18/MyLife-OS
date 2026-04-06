@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\TaskPriority;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,8 @@ class AuthController extends Controller
         foreach (Category::defaults() as $category) {
             $user->categories()->create($category);
         }
+
+        TaskPriority::ensureDefaultsForUser($user);
 
         return redirect()->route('login')->with('status', 'Pendaftaran berhasil! Silakan masuk.');
     }

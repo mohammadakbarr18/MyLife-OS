@@ -64,12 +64,9 @@
             <div class="divide-y divide-gray-50">
                 @foreach($todos as $todo)
                     @php
-                        $priorityStyles = [
-                            'high'   => 'bg-red-50 text-red-600 border-red-200/60',
-                            'medium' => 'bg-amber-50 text-amber-700 border-amber-200/60',
-                            'low'    => 'bg-blue-50 text-blue-600 border-blue-200/60',
-                        ];
-                        $pStyle = $priorityStyles[$todo->priority] ?? $priorityStyles['medium'];
+                        $taskPriority = $todo->taskPriority;
+                        $priorityName = $taskPriority?->name ?? 'Tanpa Prioritas';
+                        $priorityColor = $taskPriority?->color ?? '#9CA3AF';
                     @endphp
 
                     {{-- Task Row: Mobile = single horizontal row, Desktop = row with hover animation --}}
@@ -114,8 +111,9 @@
                             <div class="flex items-center gap-2
                                         md:transition-transform md:duration-300 md:ease-out
                                         md:group-hover:-translate-x-[5.5rem]">
-                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border {{ $pStyle }}">
-                                    {{ ucfirst($todo->priority) }}
+                                <span class="inline-flex items-center gap-2 max-w-[11rem] px-2.5 py-1 rounded-full text-xs font-semibold border border-gray-200 bg-white text-gray-700">
+                                    <span class="w-2 h-2 rounded-full flex-shrink-0" style="background-color: {{ $priorityColor }}"></span>
+                                    <span class="truncate">{{ $priorityName }}</span>
                                 </span>
                                 <span x-show="completed"
                                       class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
@@ -138,7 +136,7 @@
                                         md:transition-all md:duration-300 md:ease-out">
                                 {{-- Edit --}}
                                 <button type="button"
-                                        @click="editTodoModalOpen = true; editTodoId = {{ $todo->id }}; editTodoTitle = '{{ addslashes($todo->title) }}'; editTodoPriority = '{{ $todo->priority }}'; editTodoDueDate = '{{ $todo->due_date ? $todo->due_date->format('Y-m-d') : '' }}'"
+                                        @click="editTodoModalOpen = true; editTodoId = {{ $todo->id }}; editTodoTitle = '{{ addslashes($todo->title) }}'; editTodoPriorityId = '{{ $todo->task_priority_id }}'; editTodoDueDate = '{{ $todo->due_date ? $todo->due_date->format('Y-m-d') : '' }}'"
                                         class="p-2 rounded-xl text-gray-400 hover:text-amber-600 hover:bg-amber-50 transition-colors duration-200"
                                         title="Edit">
                                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

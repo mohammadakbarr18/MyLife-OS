@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\TaskPriority;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,8 +20,9 @@ class SettingsController extends Controller
 
         $incomeCategories  = $user->categories()->income()->orderBy('name')->get();
         $expenseCategories = $user->categories()->expense()->orderBy('name')->get();
+        $taskPriorities    = $user->taskPriorities()->orderBy('created_at')->get();
 
-        return view('settings', compact('incomeCategories', 'expenseCategories'));
+        return view('settings', compact('incomeCategories', 'expenseCategories', 'taskPriorities'));
     }
 
     /**
@@ -106,5 +108,69 @@ class SettingsController extends Controller
         $category->delete();
 
         return back()->with('success', 'Kategori berhasil dihapus!');
+    }
+
+    /**
+     * Store a new task priority.
+     */
+    public function storePriority(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique('task_priorities', 'name')->where(fn ($query) => $query->where('user_id', Auth::id())),
+            ],
+            'color' => ['required', 'string', 'size:7', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+        ]);
+
+        Auth::user()->taskPriorities()->create($validated);
+
+        return back()->with('success', 'Prioritas berhasil dibuat!');
+    }
+
+    /**
+     * Update an existing task priority.
+     */
+    public function updatePriority(Request $request, TaskPriority $taskPriority)
+    {
+        abort_unless($taskPriority->user_id === Auth::id(), 403);
+
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique('task_priorities', 'name')
+                    ->ignore($taskPriority->id)
+                    ->where(fn ($query) => $query->where('user_id', Auth::id())),
+            ],
+            'color' => ['required', 'string', 'size:7', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+        ]);
+
+        $taskPriority->update($validated);
+
+        return back()->with('success', 'Prioritas berhasil diperbarui!');
+    }
+
+    /**
+     * Delete an existing task priority.
+     */
+    public function destroyPriority(TaskPriority $taskPriority)
+    {
+        abort_unless($taskPriority->user_id === Auth::id(), 403);
+
+        if ($taskPriority->todos()->exists()) {
+            return back()->with('error', 'Prioritas masih dipakai oleh tugas aktif dan belum bisa dihapus.');
+        }
+
+        if (Auth::user()->taskPriorities()->count() <= 1) {
+            return back()->with('error', 'Sisakan minimal satu prioritas agar To-Do List tetap bisa digunakan.');
+        }
+
+        $taskPriority->delete();
+
+        return back()->with('success', 'Prioritas berhasil dihapus!');
     }
 }

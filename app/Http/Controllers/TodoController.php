@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class TodoController extends Controller
 {
@@ -15,6 +16,7 @@ class TodoController extends Controller
     {
         $todos = Auth::user()
             ->todos()
+            ->with('taskPriority')
             ->orderByRaw("CASE WHEN status = 'pending' THEN 0 ELSE 1 END")
             ->orderBy('created_at', 'desc')
             ->get();
@@ -27,17 +29,22 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
+        $user = $request->user();
+
         $validated = $request->validate([
-            'title'    => 'required|max:255',
-            'priority' => 'required|in:high,medium,low', // Lowercase to match DB enum and factory
+            'title' => 'required|max:255',
+            'task_priority_id' => [
+                'required',
+                Rule::exists('task_priorities', 'id')->where(fn ($query) => $query->where('user_id', $user->id)),
+            ],
             'due_date' => 'nullable|date',
         ]);
 
-        Auth::user()->todos()->create([
-            'title'    => $validated['title'],
-            'priority' => $validated['priority'],
+        $user->todos()->create([
+            'title' => $validated['title'],
+            'task_priority_id' => $validated['task_priority_id'],
             'due_date' => $validated['due_date'],
-            'status'   => 'pending', // Default status
+            'status' => 'pending',
         ]);
 
         return back()->with('success', 'Tugas berhasil ditambahkan!');
@@ -67,14 +74,17 @@ class TodoController extends Controller
         abort_unless($todo->user_id === Auth::id(), 403);
 
         $validated = $request->validate([
-            'title'    => 'required|max:255',
-            'priority' => 'required|in:high,medium,low',
+            'title' => 'required|max:255',
+            'task_priority_id' => [
+                'required',
+                Rule::exists('task_priorities', 'id')->where(fn ($query) => $query->where('user_id', $request->user()->id)),
+            ],
             'due_date' => 'nullable|date',
         ]);
 
         $todo->update([
-            'title'    => $validated['title'],
-            'priority' => $validated['priority'],
+            'title' => $validated['title'],
+            'task_priority_id' => $validated['task_priority_id'],
             'due_date' => $validated['due_date'],
         ]);
 

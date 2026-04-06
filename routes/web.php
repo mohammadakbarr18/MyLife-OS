@@ -58,5 +58,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/settings/categories', [SettingsController::class, 'storeCategory'])->name('settings.categories.store');
     Route::put('/settings/categories/{category}', [SettingsController::class, 'updateCategory'])->name('settings.categories.update');
     Route::delete('/settings/categories/{category}', [SettingsController::class, 'destroyCategory'])->name('settings.categories.destroy');
+    Route::post('/settings/priorities', [SettingsController::class, 'storePriority'])->name('settings.priorities.store');
+    Route::put('/settings/priorities/{taskPriority}', [SettingsController::class, 'updatePriority'])->name('settings.priorities.update');
+    Route::delete('/settings/priorities/{taskPriority}', [SettingsController::class, 'destroyPriority'])->name('settings.priorities.destroy');
 
 });

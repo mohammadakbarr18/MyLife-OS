@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Schedule;
+use App\Models\TaskPriority;
 use App\Models\Todo;
 use App\Models\Transaction;
 use App\Models\User;
@@ -25,6 +26,9 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        TaskPriority::ensureDefaultsForUser($user);
+        $taskPriorityIds = $user->taskPriorities()->pluck('id');
+
         $this->command->info("✅ Test User ready: test@example.com / password");
 
         // Seed 10 transactions (mix of 3 income + 7 expense for realism)
@@ -46,12 +50,14 @@ class DatabaseSeeder extends Seeder
         Todo::factory()
             ->count(3)
             ->pending()
+            ->state(fn () => ['task_priority_id' => $taskPriorityIds->random()])
             ->for($user)
             ->create();
 
         Todo::factory()
             ->count(2)
             ->completed()
+            ->state(fn () => ['task_priority_id' => $taskPriorityIds->random()])
             ->for($user)
             ->create();
 

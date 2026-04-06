@@ -72,6 +72,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all task priorities for the user.
+     */
+    public function taskPriorities(): HasMany
+    {
+        return $this->hasMany(TaskPriority::class);
+    }
+
+    /**
      * Get all schedules for the user.
      */
     public function schedules(): HasMany

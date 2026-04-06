@@ -21,14 +21,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Share user's categories globally for the transaction modal dropdowns
-        View::composer('*', function ($view) {
+        // Share data used by the global transaction and todo modals.
+        View::composer('layouts.app', function ($view) {
             if (Auth::check()) {
                 $user = Auth::user();
-                $view->with('globalIncomeCategories', $user->categories()->income()->orderBy('name')->get());
-                $view->with('globalExpenseCategories', $user->categories()->expense()->orderBy('name')->get());
+                $view->with([
+                    'globalIncomeCategories' => $user->categories()->income()->orderBy('name')->get(),
+                    'globalExpenseCategories' => $user->categories()->expense()->orderBy('name')->get(),
+                    'globalTaskPriorities' => $user->taskPriorities()->orderBy('created_at')->get(),
+                ]);
             }
         });
     }
 }
-
