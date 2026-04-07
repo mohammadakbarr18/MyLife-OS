@@ -118,7 +118,7 @@ Smart Daily Planner dengan timeline visual, navigasi antar tanggal, indikator "n
 ---
 
 ### ⚙️ Settings
-Kustomisasi kategori pemasukan dan pengeluaran dengan emoji icon.
+Kelola informasi profil, update password, kategori keuangan, dan prioritas To-Do List dari satu halaman pengaturan.
 
 <p align="center">
   <img src="public/assets/screenshots/settings.png" width="100%" alt="Settings Page" style="border-radius: 12px;">
@@ -133,6 +133,7 @@ Kustomisasi kategori pemasukan dan pengeluaran dengan emoji icon.
 - Login dengan opsi "Remember Me"
 - Logout aman dengan session invalidation
 - Setiap user baru otomatis mendapat kategori default (Salary, Freelance, Food, Transport, dll.)
+- Setiap user baru otomatis mendapat prioritas default (`High`, `Medium`, `Low`)
 
 ### 📊 Dashboard
 - **Ringkasan Keuangan Bulanan** — Total pemasukan dan pengeluaran bulan ini
@@ -149,7 +150,9 @@ Kustomisasi kategori pemasukan dan pengeluaran dengan emoji icon.
 - Pengurutan otomatis berdasarkan tanggal terbaru
 
 ### ✅ To-Do List
-- Buat tugas baru dengan judul, prioritas (High / Medium / Low), dan deadline
+- Buat tugas baru dengan judul, prioritas, dan deadline
+- Prioritas tugas diambil dari daftar prioritas milik user yang dikelola lewat Settings
+- Setiap tugas menampilkan badge prioritas berwarna agar level urgensi lebih mudah dibaca
 - **Toggle Completion** — Klik checkbox untuk menandai tugas selesai secara real-time (AJAX)
 - Edit tugas yang sudah ada melalui modal
 - Hapus tugas dengan konfirmasi modal yang elegan
@@ -165,10 +168,16 @@ Kustomisasi kategori pemasukan dan pengeluaran dengan emoji icon.
 - **Duration Badge** — Kalkulasi otomatis durasi setiap kegiatan (contoh: 1j 30m)
 
 ### ⚙️ Pengaturan (Settings)
+- Perbarui **nama** dan **email** profil langsung dari halaman Settings
+- Ganti password akun dengan validasi `current_password` dan konfirmasi password baru
 - Kelola kategori pemasukan dan pengeluaran
 - Setiap kategori memiliki **nama** dan **ikon emoji** kustom
 - Tambah, edit, dan hapus kategori
 - Kategori digunakan di seluruh aplikasi (transaksi, dashboard)
+- Kelola prioritas To-Do List dengan **nama** dan **warna** kustom
+- Tambah, edit, dan hapus prioritas tugas
+- Prioritas yang masih dipakai oleh tugas aktif tidak bisa dihapus
+- Sistem menjaga minimal satu prioritas agar To-Do List tetap bisa digunakan
 
 ---
 
@@ -187,6 +196,8 @@ Kustomisasi kategori pemasukan dan pengeluaran dengan emoji icon.
 ---
 
 ## 📂 Struktur Project
+
+> Catatan: struktur terbaru juga mencakup `TaskPriority.php`, dukungan prioritas global di `AppServiceProvider.php`, serta pembaruan `SettingsController` dan `settings.blade.php` untuk profil, password, kategori, dan prioritas tugas.
 
 ```
 MyLife OS/
@@ -328,10 +339,12 @@ http://localhost:8000
 ```mermaid
 erDiagram
     USERS ||--o{ CATEGORIES : has
+    USERS ||--o{ TASK_PRIORITIES : has
     USERS ||--o{ TRANSACTIONS : has
     USERS ||--o{ TODOS : has
     USERS ||--o{ SCHEDULES : has
     CATEGORIES ||--o{ TRANSACTIONS : categorizes
+    TASK_PRIORITIES ||--o{ TODOS : prioritizes
 
     USERS {
         bigint id PK
@@ -363,12 +376,20 @@ erDiagram
         timestamps created_at
     }
 
+    TASK_PRIORITIES {
+        bigint id PK
+        bigint user_id FK
+        string name
+        string color
+        timestamps created_at
+    }
+
     TODOS {
         bigint id PK
         bigint user_id FK
         string title
         enum status "pending | completed"
-        enum priority "low | medium | high"
+        bigint task_priority_id FK
         date due_date "nullable"
         timestamps created_at
     }
@@ -412,9 +433,14 @@ erDiagram
 | `PUT` | `/schedule/{id}` | `ScheduleController@update` | Update jadwal |
 | `DELETE` | `/schedule/{id}` | `ScheduleController@destroy` | Hapus jadwal |
 | `GET` | `/settings` | `SettingsController@index` | Halaman pengaturan |
+| `PUT` | `/settings/profile` | `SettingsController@updateProfile` | Update nama dan email profil |
+| `PUT` | `/settings/password` | `SettingsController@updatePassword` | Update password akun |
 | `POST` | `/settings/categories` | `SettingsController@storeCategory` | Tambah kategori |
 | `PUT` | `/settings/categories/{id}` | `SettingsController@updateCategory` | Update kategori |
 | `DELETE` | `/settings/categories/{id}` | `SettingsController@destroyCategory` | Hapus kategori |
+| `POST` | `/settings/priorities` | `SettingsController@storePriority` | Tambah prioritas tugas |
+| `PUT` | `/settings/priorities/{id}` | `SettingsController@updatePriority` | Update prioritas tugas |
+| `DELETE` | `/settings/priorities/{id}` | `SettingsController@destroyPriority` | Hapus prioritas tugas |
 
 ---
 

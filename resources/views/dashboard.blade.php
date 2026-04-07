@@ -223,7 +223,7 @@
                         </svg>
                     </div>
                     <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                        Tugas Hari Ini
+                        List tugas
                     </h3>
                 </div>
                 <a href="{{ route('todo') }}"
