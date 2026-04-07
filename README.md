@@ -338,11 +338,11 @@ http://localhost:8000
 
 ```mermaid
 erDiagram
-    USERS ||--o{ CATEGORIES : has
-    USERS ||--o{ TASK_PRIORITIES : has
-    USERS ||--o{ TRANSACTIONS : has
-    USERS ||--o{ TODOS : has
-    USERS ||--o{ SCHEDULES : has
+    USERS ||--o{ CATEGORIES : owns
+    USERS ||--o{ TRANSACTIONS : owns
+    USERS ||--o{ TASK_PRIORITIES : owns
+    USERS ||--o{ TODOS : owns
+    USERS ||--o{ SCHEDULES : owns
     CATEGORIES ||--o{ TRANSACTIONS : categorizes
     TASK_PRIORITIES ||--o{ TODOS : prioritizes
 
@@ -351,9 +351,10 @@ erDiagram
         string name
         string email
         string password
-        timestamp email_verified_at
+        datetime email_verified_at
         string remember_token
-        timestamps created_at
+        datetime created_at
+        datetime updated_at
     }
 
     CATEGORIES {
@@ -361,19 +362,21 @@ erDiagram
         bigint user_id FK
         string name
         string icon
-        enum type "income | expense"
-        timestamps created_at
+        string type
+        datetime created_at
+        datetime updated_at
     }
 
     TRANSACTIONS {
         bigint id PK
         bigint user_id FK
-        enum type "income | expense"
-        decimal amount "15,2"
+        string type
+        decimal amount
         bigint category_id FK
-        text description "nullable"
+        text description
         date date
-        timestamps created_at
+        datetime created_at
+        datetime updated_at
     }
 
     TASK_PRIORITIES {
@@ -381,17 +384,19 @@ erDiagram
         bigint user_id FK
         string name
         string color
-        timestamps created_at
+        datetime created_at
+        datetime updated_at
     }
 
     TODOS {
         bigint id PK
         bigint user_id FK
         string title
-        enum status "pending | completed"
+        string status
         bigint task_priority_id FK
-        date due_date "nullable"
-        timestamps created_at
+        date due_date
+        datetime created_at
+        datetime updated_at
     }
 
     SCHEDULES {
@@ -402,10 +407,17 @@ erDiagram
         time start_time
         time end_time
         string icon
-        text note "nullable"
-        timestamps created_at
+        text note
+        datetime created_at
+        datetime updated_at
     }
 ```
+
+> Catatan:
+> - `categories.type` dan `transactions.type` berisi `income` atau `expense`
+> - `todos.status` berisi `pending` atau `completed`
+> - `todos.task_priority_id` terhubung ke `task_priorities`
+> - Prioritas default user baru adalah `High`, `Medium`, dan `Low`
 
 ---
 
