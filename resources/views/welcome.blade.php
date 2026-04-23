@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MyLife OS — Sistem Operasi untuk Kehidupanmu</title>
+    <title>Sistem Pribadi — Sistem Operasi untuk Kehidupanmu</title>
     <meta name="description" content="MyLife OS adalah sistem operasi pribadi untuk mengelola seluruh kehidupan sehari-harimu — keuangan, tugas, jadwal, dan masih banyak lagi. Semua dalam satu tempat yang rapi dan elegan.">
 
     <!-- Fonts -->
@@ -61,7 +61,7 @@
                     <!-- Badge -->
                     <div class="animate-fade-up inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-[#FCE2CE] rounded-full px-4 py-1.5 mb-6 shadow-sm">
                         <span class="w-2 h-2 bg-[#FCE2CE] rounded-full"></span>
-                        <span class="text-xs font-semibold text-[#3E2723] tracking-wide uppercase">Your Life, One System</span>
+                        <span class="text-xs font-semibold text-[#3E2723] tracking-wide uppercase">Sistem Pribadi</span>
                     </div>
 
                     <!-- H1 Headline -->
@@ -116,7 +116,7 @@
                     <!-- Hero Image -->
                     <img src="{{ asset('assets/login-illustration.svg') }}"
                          class="relative z-10 w-52 sm:w-64 md:w-72 lg:w-[400px] mx-auto object-contain drop-shadow-xl animate-float"
-                         alt="MyLife OS Hero Illustration">
+                         alt="Ilustrasi Hero Sistem Pribadi">
                 </div>
             </div>
         </div>
@@ -208,7 +208,7 @@
     <footer class="py-8 border-t border-[#FCE2CE]/40">
         <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-sm text-[#3E2723]/40 font-medium">
-                &copy; {{ date('Y') }} MyLife OS. Built with <span class="text-[#FCE2CE]">&hearts;</span> and vibe.
+                &copy; {{ date('Y') }} Sistem Pribadi. Dibuat dengan <span class="text-[#FCE2CE]">&hearts;</span> dan semangat.
             </p>
             <div class="flex items-center gap-6">
                 <a href="{{ route('login') }}" class="text-sm text-[#3E2723]/50 hover:text-[#3E2723] font-medium transition-colors">Masuk</a>

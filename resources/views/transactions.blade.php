@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Transactions')
-@section('page-title', 'Transactions')
+@section('title', 'Keuangan')
+@section('page-title', 'Keuangan')
 @section('page-subtitle', 'Kelola pemasukan & pengeluaranmu')
 
 @section('content')
@@ -36,7 +36,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
             <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                Riwayat Transactions
+                Riwayat Keuangan
             </h2>
             <p class="text-sm text-gray-400 mt-0.5">Pantau semua pemasukan dan pengeluaranmu</p>
         </div>
@@ -50,7 +50,7 @@
                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
-                Income
+                Pemasukan
             </button>
             <button @click="transactionModalOpen = true; transactionType = 'expense'"
                     class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-semibold
@@ -59,7 +59,7 @@
                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
-                Expense
+                Pengeluaran
             </button>
         </div>
     </div>
@@ -150,12 +150,12 @@
                                     @if($transaction->type === 'income')
                                         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
                                                      bg-green-50 text-green-700 border border-green-200/60">
-                                            ↗ Income
+                                            ↗ Pemasukan
                                         </span>
                                     @else
                                         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
                                                      bg-red-50 text-red-600 border border-red-200/60">
-                                            ↘ Expense
+                                            ↘ Pengeluaran
                                         </span>
                                     @endif
                                 </td>
@@ -184,7 +184,7 @@
                     Belum Ada Transaksi
                 </h3>
                 <p class="text-sm text-gray-400 text-center max-w-sm leading-relaxed">
-                    Yuk, mulai catat keuanganmu dengan menambahkan transaksi Income atau Expense pertamamu.
+                    Yuk, mulai catat keuanganmu dengan menambahkan transaksi Pemasukan atau Pengeluaran pertamamu.
                 </p>
 
                 {{-- Decorative dots --}}

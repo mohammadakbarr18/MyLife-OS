@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
-@section('page-title', 'Dashboard')
+@section('title', 'Beranda')
+@section('page-title', 'Beranda')
 @section('page-subtitle', 'Selamat datang kembali, ' . (Auth::user()->name ?? 'User') . '!')
 
 @section('content')
@@ -15,7 +15,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                    📊 Financial Overview
+                    📊 Ringkasan Keuangan
                 </h2>
                 <p class="text-sm text-gray-400 mt-0.5">Ringkasan keuanganmu bulan ini</p>
             </div>
@@ -29,7 +29,7 @@
                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    Income
+                    Pemasukan
                 </button>
                 <button @click="transactionModalOpen = true; transactionType = 'expense'"
                         class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-semibold
@@ -38,7 +38,7 @@
                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    Expense
+                    Pengeluaran
                 </button>
             </div>
         </div>
@@ -57,7 +57,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500 font-medium leading-tight">Income Bulan Ini</p>
+                    <p class="text-sm text-gray-500 font-medium leading-tight">Pemasukan Bulan Ini</p>
                     <p class="text-xs text-gray-400">Pemasukan</p>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500 font-medium leading-tight">Expense Bulan Ini</p>
+                    <p class="text-sm text-gray-500 font-medium leading-tight">Pengeluaran Bulan Ini</p>
                     <p class="text-xs text-gray-400">Pengeluaran</p>
                 </div>
             </div>
@@ -223,7 +223,7 @@
                         </svg>
                     </div>
                     <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                        List tugas
+                        Daftar Tugas
                     </h3>
                 </div>
                 <a href="{{ route('todo') }}"
@@ -376,7 +376,7 @@
                     </div>
                     <h4 class="text-base font-bold text-[#3E2723] mb-1.5" style="font-family: 'Poppins', sans-serif;">Hari Ini Masih Kosong</h4>
                     <p class="text-sm text-gray-400 text-center max-w-xs leading-relaxed mb-5">
-                        Belum ada jadwal untuk hari ini. Rencanakan harimu lewat Daily Planner!
+                        Belum ada jadwal untuk hari ini. Rencanakan harimu lewat halaman Jadwal!
                     </p>
                     <a href="{{ route('schedule.index') }}"
                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-semibold

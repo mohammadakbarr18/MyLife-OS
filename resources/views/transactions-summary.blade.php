@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Financial Reports')
-@section('page-title', 'Financial Reports')
+@section('title', 'Laporan Keuangan')
+@section('page-title', 'Laporan Keuangan')
 @section('page-subtitle', 'Ringkasan transaksimu berdasarkan periode')
 
 @section('content')
@@ -12,7 +12,7 @@
         <svg class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
-        Kembali ke Transactions
+        Kembali ke Keuangan
     </a>
 
     @if(count($groupedTransactions) > 0)
@@ -68,7 +68,7 @@
                             <div class="flex items-center justify-between py-2.5 border-b border-gray-50">
                                 <div class="flex items-center gap-2">
                                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                                    <span class="text-xs font-medium text-gray-500">Income</span>
+                                    <span class="text-xs font-medium text-gray-500">Pemasukan</span>
                                 </div>
                                 <span class="text-sm font-bold text-emerald-600">
                                     +Rp {{ number_format($monthData['total_income'], 0, ',', '.') }}
@@ -79,7 +79,7 @@
                             <div class="flex items-center justify-between py-2.5 border-b border-gray-50">
                                 <div class="flex items-center gap-2">
                                     <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-                                    <span class="text-xs font-medium text-gray-500">Expense</span>
+                                    <span class="text-xs font-medium text-gray-500">Pengeluaran</span>
                                 </div>
                                 <span class="text-sm font-bold text-red-500">
                                     -Rp {{ number_format($monthData['total_expense'], 0, ',', '.') }}

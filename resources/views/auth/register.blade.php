@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign Up - MyLife OS</title>
+    <title>Daftar - Sistem Pribadi</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -31,14 +31,14 @@
             </div>
 
             <!-- ========== FORM COLUMN ========== -->
-            <div class="order-2 lg:order-2 flex flex-col justify-center w-full max-w-md mx-auto lg:px-16 lg:py-12 lg:bg-[#FEF6EF]">
+            <div class="order-2 lg:order-2 flex flex-col justify-center w-full max-w-md mx-auto lg:px-8 xl:px-12 lg:py-12 lg:bg-[#FEF6EF]">
                 
                 <!-- Heading -->
-                <h2 class="text-3xl md:text-4xl font-bold text-[#3E2723] text-center mb-1" style="font-family: 'Poppins', sans-serif;">
-                    Create Account
+                <h2 class="text-2xl sm:text-3xl xl:text-4xl font-bold text-[#3E2723] text-center mb-1 whitespace-nowrap" style="font-family: 'Poppins', sans-serif;">
+                    Buat Akun Baru
                 </h2>
                 <p class="text-sm font-medium text-gray-400 text-center mb-6">
-                    Start your journey with MyLife OS
+                    Mulai perjalananmu bersama Sistem Pribadi
                 </p>
 
                 <form method="POST" action="{{ route('register') }}" class="space-y-5">
@@ -46,7 +46,7 @@
 
                     <!-- Full Name -->
                     <div class="space-y-1">
-                        <label for="name" class="block text-xs font-semibold text-gray-500 ml-4">Full Name</label>
+                        <label for="name" class="block text-xs font-semibold text-gray-500 ml-4">Nama Lengkap</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,14 +55,14 @@
                             </div>
                             <input id="name" type="text" name="name" :value="old('name')" required autofocus
                                    class="w-full pl-11 pr-4 py-3.5 rounded-3xl border border-gray-200 shadow-sm focus:border-[#FCE2CE] focus:ring-[#FCE2CE] bg-white transition-all outline-none placeholder-gray-400"
-                                   placeholder="Full Name">
+                                   placeholder="Nama lengkapmu">
                         </div>
                         <x-input-error :messages="$errors->get('name')" class="mt-2 ml-4" />
                     </div>
 
                     <!-- Email Address -->
                     <div class="space-y-1">
-                        <label for="email" class="block text-xs font-semibold text-gray-500 ml-4">Email Address</label>
+                        <label for="email" class="block text-xs font-semibold text-gray-500 ml-4">Alamat Email</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -78,7 +78,7 @@
 
                     <!-- Password -->
                     <div class="space-y-1">
-                        <label for="password" class="block text-xs font-semibold text-gray-500 ml-4">Password</label>
+                        <label for="password" class="block text-xs font-semibold text-gray-500 ml-4">Kata Sandi</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -87,7 +87,7 @@
                             </div>
                             <input id="password" type="password" name="password" required autocomplete="new-password"
                                    class="w-full pl-11 pr-12 py-3.5 rounded-3xl border border-gray-200 shadow-sm focus:border-[#FCE2CE] focus:ring-[#FCE2CE] bg-white transition-all outline-none placeholder-gray-400"
-                                   placeholder="Enter your password">
+                                   placeholder="Masukkan kata sandimu">
                             <button type="button" onclick="const p=document.getElementById('password');const show=this.querySelector('.eye-show');const hide=this.querySelector('.eye-hide');if(p.type==='password'){p.type='text';show.classList.add('hidden');hide.classList.remove('hidden')}else{p.type='password';show.classList.remove('hidden');hide.classList.add('hidden')}" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-500 transition-colors">
                                 <svg class="h-5 w-5 eye-show" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -103,7 +103,7 @@
 
                     <!-- Confirm Password -->
                     <div class="space-y-1">
-                        <label for="password_confirmation" class="block text-xs font-semibold text-gray-500 ml-4">Confirm Password</label>
+                        <label for="password_confirmation" class="block text-xs font-semibold text-gray-500 ml-4">Konfirmasi Kata Sandi</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -112,7 +112,7 @@
                             </div>
                             <input id="password_confirmation" type="password" name="password_confirmation" required
                                    class="w-full pl-11 pr-12 py-3.5 rounded-3xl border border-gray-200 shadow-sm focus:border-[#FCE2CE] focus:ring-[#FCE2CE] bg-white transition-all outline-none placeholder-gray-400"
-                                   placeholder="Enter your password">
+                                   placeholder="Ulangi kata sandimu">
                             <button type="button" onclick="const p=document.getElementById('password_confirmation');const show=this.querySelector('.eye-show');const hide=this.querySelector('.eye-hide');if(p.type==='password'){p.type='text';show.classList.add('hidden');hide.classList.remove('hidden')}else{p.type='password';show.classList.remove('hidden');hide.classList.add('hidden')}" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-500 transition-colors">
                                 <svg class="h-5 w-5 eye-show" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -129,12 +129,12 @@
                     <!-- Sign Up Button -->
                     <button type="submit" 
                             class="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-3xl shadow-lg text-base font-bold text-[#5F402D] bg-[#FCE2CE] hover:bg-[#ffdec0] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FCE2CE] transition-all transform hover:scale-[1.01]">
-                        Sign Up
+                        Daftar
                     </button>
 
                     <p class="text-center text-xs font-semibold text-gray-400 mt-4">
-                        Already have an account? 
-                        <a href="{{ route('login') }}" class="text-[#5F402D] hover:underline font-bold">Log in</a>
+                        Sudah punya akun? 
+                        <a href="{{ route('login') }}" class="text-[#5F402D] hover:underline font-bold">Masuk di sini</a>
                     </p>
                 </form>
             </div>

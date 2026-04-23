@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'To-Do List')
-@section('page-title', 'To-Do List')
+@section('title', 'Daftar Tugas')
+@section('page-title', 'Daftar Tugas')
 @section('page-subtitle', 'Atur tugas dan target harianmu')
 
 @section('content')
@@ -24,7 +24,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
             <h2 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
-                My To-Do List
+                Daftar Tugas Saya
             </h2>
             <p class="text-sm text-gray-400 mt-0.5">Tetap produktif dan terorganisir</p>
         </div>
@@ -118,12 +118,12 @@
                                 <span x-show="completed"
                                       class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
                                              bg-emerald-50 text-emerald-700 border border-emerald-200/60">
-                                    ✅ Done
+                                    ✅ Selesai
                                 </span>
                                 <span x-show="!completed"
                                       class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
                                              bg-orange-50 text-orange-600 border border-orange-200/60">
-                                    ⏳ Pending
+                                    ⏳ Tertunda
                                 </span>
                             </div>
 
@@ -185,7 +185,7 @@
                     Belum Ada Tugas
                 </h3>
                 <p class="text-sm text-gray-400 text-center max-w-sm leading-relaxed">
-                    Yuk, mulai tambahkan tugas untuk tetap produktif. To-Do List-mu akan muncul di sini.
+                    Yuk, mulai tambahkan tugas untuk tetap produktif. Daftar tugasmu akan muncul di sini.
                 </p>
 
                 {{-- Decorative dots --}}

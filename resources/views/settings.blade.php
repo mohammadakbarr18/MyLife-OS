@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Settings')
-@section('page-title', 'Settings')
+@section('title', 'Pengaturan')
+@section('page-title', 'Pengaturan')
 @section('page-subtitle', 'Kelola akun dan preferensimu')
 
 @section('content')
@@ -9,7 +9,7 @@
     {{-- Page Header --}}
     <div class="mb-8">
         <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-[#F5D0B0]/60 text-xs font-semibold uppercase tracking-[0.2em] text-[#B77B57] shadow-sm">
-            Settings Hub
+            Pusat Pengaturan
         </span>
         <h2 class="mt-4 text-2xl font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">
             Kelola akun dan preferensimu
@@ -53,8 +53,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Profile Information</h3>
-                    <p class="text-sm text-gray-500 mt-1">Update your account&apos;s profile information and email address.</p>
+                    <h3 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Informasi Profil</h3>
+                    <p class="text-sm text-gray-500 mt-1">Perbarui nama dan alamat email akunmu.</p>
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div class="space-y-2">
-                        <label for="profile_name" class="block text-sm font-semibold text-[#6B4F3A]">Name</label>
+                        <label for="profile_name" class="block text-sm font-semibold text-[#6B4F3A]">Nama</label>
                         <input
                             id="profile_name"
                             name="name"
@@ -73,7 +73,7 @@
                             required
                             autocomplete="name"
                             class="w-full rounded-[1.5rem] border border-[#F1E3D8] bg-[#FFFBF7] px-4 py-3.5 text-sm font-medium text-[#3E2723] placeholder:text-gray-400 shadow-sm transition-all focus:border-[#F5D0B0] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/60"
-                            placeholder="Your name"
+                            placeholder="Nama lengkapmu"
                         >
                         <x-input-error :messages="$errors->updateProfile->get('name')" class="ml-1 text-xs" />
                     </div>
@@ -99,7 +99,7 @@
                         type="submit"
                         class="inline-flex items-center justify-center rounded-2xl bg-[#FCE2CE] px-6 py-3 text-sm font-bold text-[#5F402D] shadow-sm transition-all hover:bg-[#F5D0B0] hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/70"
                     >
-                        Save Profile
+                        Simpan Profil
                     </button>
                 </div>
             </form>
@@ -113,8 +113,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Update Password</h3>
-                    <p class="text-sm text-gray-500 mt-1">Ensure your account is using a long, random password to stay secure.</p>
+                    <h3 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Perbarui Kata Sandi</h3>
+                    <p class="text-sm text-gray-500 mt-1">Pastikan akunmu menggunakan kata sandi yang panjang dan acak agar tetap aman.</p>
                 </div>
             </div>
 
@@ -124,7 +124,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div class="space-y-2">
-                        <label for="current_password" class="block text-sm font-semibold text-[#6B4F3A]">Current Password</label>
+                        <label for="current_password" class="block text-sm font-semibold text-[#6B4F3A]">Kata Sandi Saat Ini</label>
                         <input
                             id="current_password"
                             name="current_password"
@@ -132,13 +132,13 @@
                             required
                             autocomplete="current-password"
                             class="w-full rounded-[1.5rem] border border-[#F1E3D8] bg-[#FFFBF7] px-4 py-3.5 text-sm font-medium text-[#3E2723] placeholder:text-gray-400 shadow-sm transition-all focus:border-[#F5D0B0] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/60"
-                            placeholder="Current password"
+                            placeholder="Kata sandi saat ini"
                         >
                         <x-input-error :messages="$errors->updatePassword->get('current_password')" class="ml-1 text-xs" />
                     </div>
 
                     <div class="space-y-2">
-                        <label for="password" class="block text-sm font-semibold text-[#6B4F3A]">New Password</label>
+                        <label for="password" class="block text-sm font-semibold text-[#6B4F3A]">Kata Sandi Baru</label>
                         <input
                             id="password"
                             name="password"
@@ -146,13 +146,13 @@
                             required
                             autocomplete="new-password"
                             class="w-full rounded-[1.5rem] border border-[#F1E3D8] bg-[#FFFBF7] px-4 py-3.5 text-sm font-medium text-[#3E2723] placeholder:text-gray-400 shadow-sm transition-all focus:border-[#F5D0B0] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/60"
-                            placeholder="New password"
+                            placeholder="Kata sandi baru"
                         >
                         <x-input-error :messages="$errors->updatePassword->get('password')" class="ml-1 text-xs" />
                     </div>
 
                     <div class="space-y-2">
-                        <label for="password_confirmation" class="block text-sm font-semibold text-[#6B4F3A]">Confirm Password</label>
+                        <label for="password_confirmation" class="block text-sm font-semibold text-[#6B4F3A]">Konfirmasi Kata Sandi</label>
                         <input
                             id="password_confirmation"
                             name="password_confirmation"
@@ -160,7 +160,7 @@
                             required
                             autocomplete="new-password"
                             class="w-full rounded-[1.5rem] border border-[#F1E3D8] bg-[#FFFBF7] px-4 py-3.5 text-sm font-medium text-[#3E2723] placeholder:text-gray-400 shadow-sm transition-all focus:border-[#F5D0B0] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/60"
-                            placeholder="Confirm password"
+                            placeholder="Konfirmasi kata sandi"
                         >
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                         type="submit"
                         class="inline-flex items-center justify-center rounded-2xl bg-[#3E2723] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/15 transition-all hover:bg-[#2A1A18] hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-[#FCE2CE]/70"
                     >
-                        Save Password
+                        Simpan Kata Sandi
                     </button>
                 </div>
             </form>
@@ -181,7 +181,7 @@
 
     <div class="mb-8">
         <h3 class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Manajemen Kategori Keuangan</h3>
-        <p class="text-sm text-gray-500 mb-4">Atur label kategori untuk mencatat pemasukan dan pengeluaran pada fitur Transactions.</p>
+        <p class="text-sm text-gray-500 mb-4">Atur label kategori untuk mencatat pemasukan dan pengeluaran pada fitur Keuangan.</p>
     </div>
 
     {{-- 2-Column Grid --}}
@@ -198,7 +198,7 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Kategori Income</h3>
+                        <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Kategori Pemasukan</h3>
                         <p class="text-xs text-gray-400 mt-0.5">{{ $incomeCategories->count() }} kategori</p>
                     </div>
                 </div>
@@ -246,7 +246,7 @@
                         <svg class="w-10 h-10 mb-3 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
                         </svg>
-                        <p class="text-sm font-medium">Belum ada kategori income</p>
+                        <p class="text-sm font-medium">Belum ada kategori pemasukan</p>
                         <p class="text-xs mt-1">Klik "Tambah Baru" untuk membuatnya</p>
                     </div>
                 @endforelse
@@ -269,7 +269,7 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Kategori Expense</h3>
+                        <h3 class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Kategori Pengeluaran</h3>
                         <p class="text-xs text-gray-400 mt-0.5">{{ $expenseCategories->count() }} kategori</p>
                     </div>
                 </div>
@@ -317,7 +317,7 @@
                         <svg class="w-10 h-10 mb-3 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                         </svg>
-                        <p class="text-sm font-medium">Belum ada kategori expense</p>
+                        <p class="text-sm font-medium">Belum ada kategori pengeluaran</p>
                         <p class="text-xs mt-1">Klik "Tambah Baru" untuk membuatnya</p>
                     </div>
                 @endforelse

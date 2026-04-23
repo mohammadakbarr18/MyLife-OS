@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Daily Planner')
-@section('page-title', 'Daily Planner')
+@section('title', 'Jadwal')
+@section('page-title', 'Jadwal')
 @section('page-subtitle', 'Atur jadwal dan rutinitas harianmu')
 
 @section('content')
@@ -244,7 +244,7 @@
                                               class="flex-shrink-0 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider
                                                      bg-[#5F402D] text-white shadow-sm animate-pulse">
                                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                            Now
+                                            Sekarang
                                         </span>
                                     </div>
                                     <p class="text-xs sm:text-[13px] font-medium mt-0.5 transition-colors duration-500 flex items-center flex-wrap gap-1"

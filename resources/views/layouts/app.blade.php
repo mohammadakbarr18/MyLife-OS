@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Dashboard') - {{ config('app.name', 'MyLife OS') }}</title>
+    <title>@yield('title', 'Beranda') - {{ config('app.name', 'Sistem Pribadi') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
                 </div>
-                <span class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">MyLife OS</span>
+                <span class="text-lg font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Sistem Pribadi</span>
             </div>
 
             <!-- Navigation Links -->
@@ -45,7 +45,7 @@
                     <svg class="w-5 h-5 transition-colors {{ request()->routeIs('dashboard') ? 'text-[#5F402D]' : 'text-gray-400 group-hover:text-[#5F402D]' }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
-                    Dashboard
+                    Beranda
                 </a>
 
                 <!-- Transactions -->
@@ -55,7 +55,7 @@
                     <svg class="w-5 h-5 transition-colors {{ request()->routeIs('transactions*') ? 'text-[#5F402D]' : 'text-gray-400 group-hover:text-[#5F402D]' }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                     </svg>
-                    Transactions
+                    Keuangan
                 </a>
 
                 <!-- To-Do List -->
@@ -65,7 +65,7 @@
                     <svg class="w-5 h-5 transition-colors {{ request()->routeIs('todo*') ? 'text-[#5F402D]' : 'text-gray-400 group-hover:text-[#5F402D]' }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                     </svg>
-                    To-Do List
+                    Daftar Tugas
                 </a>
 
                 <!-- Schedule -->
@@ -75,7 +75,7 @@
                     <svg class="w-5 h-5 transition-colors {{ request()->routeIs('schedule*') ? 'text-[#5F402D]' : 'text-gray-400 group-hover:text-[#5F402D]' }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Schedule
+                    Jadwal
                 </a>
 
                 <!-- Settings -->
@@ -86,7 +86,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    Settings
+                    Pengaturan
                 </a>
             </nav>
 
@@ -163,7 +163,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                             </svg>
                         </div>
-                        <span class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">MyLife OS</span>
+                        <span class="text-base font-bold text-[#3E2723]" style="font-family: 'Poppins', sans-serif;">Sistem Pribadi</span>
                     </div>
                     <!-- User Avatar -->
                     <div class="flex items-center gap-3">
@@ -184,7 +184,7 @@
                     {{-- Left Side: Page Title & Subtitle --}}
                     <div>
                         <h1 class="text-4xl font-extrabold text-[#3E2723] tracking-tight" style="font-family: 'Poppins', sans-serif;">
-                            @yield('page-title', 'Dashboard')
+                            @yield('page-title', 'Beranda')
                         </h1>
                         <p class="text-base font-medium text-gray-500 mt-1">@yield('page-subtitle', 'Selamat datang kembali, ' . (Auth::user()->name ?? 'User') . '!')</p>
                     </div>
@@ -196,7 +196,7 @@
                             <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                             </svg>
-                            {{ now()->translatedFormat('D, d M Y') }}
+                            {{ now()->translatedFormat('l, d F Y') }}
                         </div>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
                 </div>
-                <span class="text-[10px] font-semibold">Dashboard</span>
+                <span class="text-[10px] font-semibold">Beranda</span>
             </a>
 
             <!-- Transactions -->
@@ -239,7 +239,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                     </svg>
                 </div>
-                <span class="text-[10px] font-semibold">Transactions</span>
+                <span class="text-[10px] font-semibold">Keuangan</span>
             </a>
 
             <!-- To-Do List -->
@@ -251,7 +251,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                     </svg>
                 </div>
-                <span class="text-[10px] font-semibold">To-Do</span>
+                <span class="text-[10px] font-semibold">Tugas</span>
             </a>
 
             <!-- Schedule -->
@@ -263,7 +263,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <span class="text-[10px] font-semibold">Schedule</span>
+                <span class="text-[10px] font-semibold">Jadwal</span>
             </a>
 
             <!-- Settings -->
@@ -276,7 +276,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                 </div>
-                <span class="text-[10px] font-semibold">Settings</span>
+                <span class="text-[10px] font-semibold">Pengaturan</span>
             </a>
 
         </div>
@@ -334,7 +334,7 @@
                                 </div>
                                 <div class="mt-3 sm:mt-5 text-center w-full">
                                     <h3 class="text-lg sm:text-2xl font-extrabold text-[#3E2723] tracking-tight" id="modal-title" style="font-family: 'Poppins', sans-serif;" 
-                                        x-text="transactionType === 'income' ? 'Tambah Income' : 'Tambah Expense'">
+                                        x-text="transactionType === 'income' ? 'Tambah Pemasukan' : 'Tambah Pengeluaran'">
                                     </h3>
                                     <p class="text-sm text-gray-500 mt-1" x-text="transactionType === 'income' ? 'Catat pemasukan barumu' : 'Catat pengeluaran barumu'"></p>
                                     
@@ -368,7 +368,7 @@
                                                     <option value="" disabled selected>Pilih...</option>
                                                     <!-- Income Categories (Dynamic) -->
                                                     <template x-if="transactionType === 'income'">
-                                                        <optgroup label="Income">
+                                                        <optgroup label="Pemasukan">
                                                             @isset($globalIncomeCategories)
                                                                 @foreach($globalIncomeCategories as $cat)
                                                                     <option value="{{ $cat->id }}">{{ $cat->icon }} {{ $cat->name }}</option>
@@ -378,7 +378,7 @@
                                                     </template>
                                                     <!-- Expense Categories (Dynamic) -->
                                                     <template x-if="transactionType === 'expense'">
-                                                        <optgroup label="Expense">
+                                                        <optgroup label="Pengeluaran">
                                                             @isset($globalExpenseCategories)
                                                                 @foreach($globalExpenseCategories as $cat)
                                                                     <option value="{{ $cat->id }}">{{ $cat->icon }} {{ $cat->name }}</option>
@@ -407,7 +407,7 @@
                         <div class="bg-gray-50/80 px-5 py-4 sm:px-8 sm:py-6 sm:flex sm:flex-row-reverse border-t border-gray-100/80">
                             <button type="submit" 
                                     class="inline-flex w-full justify-center items-center gap-2 rounded-2xl bg-[#3E2723] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#3E2723]/20 hover:bg-[#2A1A18] hover:-translate-y-0.5 sm:ml-3 sm:w-auto transition-all focus:ring-4 focus:ring-[#FCE2CE]/80"
-                                    x-text="transactionType === 'income' ? 'Simpan Income' : 'Simpan Expense'">
+                                    x-text="transactionType === 'income' ? 'Simpan Pemasukan' : 'Simpan Pengeluaran'">
                             </button>
                             <button type="button" @click="transactionModalOpen = false"
                                     class="mt-3 inline-flex w-full justify-center items-center rounded-2xl bg-white px-8 py-3.5 text-sm font-bold text-gray-700 shadow-sm border border-gray-200 hover:bg-gray-50 hover:text-gray-900 sm:mt-0 sm:w-auto transition-all">

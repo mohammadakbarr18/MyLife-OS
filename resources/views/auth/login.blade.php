@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Log In - MyLife OS</title>
+    <title>Masuk - Sistem Pribadi</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -31,14 +31,14 @@
             </div>
 
             <!-- ========== FORM COLUMN ========== -->
-            <div class="order-2 lg:order-1 flex flex-col justify-center w-full max-w-md mx-auto lg:px-16 lg:py-12">
+            <div class="order-2 lg:order-1 flex flex-col justify-center w-full max-w-md mx-auto lg:px-8 xl:px-12 lg:py-12">
                 
                 <!-- Heading -->
-                <h2 class="text-3xl md:text-4xl font-bold text-[#3E2723] text-center mb-1" style="font-family: 'Poppins', sans-serif;">
-                    Welcome Back!!
+                <h2 class="text-2xl sm:text-3xl xl:text-4xl font-bold text-[#3E2723] text-center mb-1 whitespace-nowrap" style="font-family: 'Poppins', sans-serif;">
+                    Selamat Datang Kembali!
                 </h2>
                 <p class="text-sm font-medium text-gray-400 text-center mb-6 hidden lg:block">
-                    Log in to continue your journey
+                    Masuk untuk melanjutkan perjalananmu
                 </p>
 
                 <!-- Session Status -->
@@ -49,7 +49,7 @@
 
                     <!-- Email Address -->
                     <div class="space-y-1">
-                        <label for="email" class="block text-xs font-semibold text-gray-500 ml-4">Email</label>
+                        <label for="email" class="block text-xs font-semibold text-gray-500 ml-4">Alamat Email</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -65,7 +65,7 @@
 
                     <!-- Password -->
                     <div class="space-y-1">
-                        <label for="password" class="block text-xs font-semibold text-gray-500 ml-4">Password</label>
+                        <label for="password" class="block text-xs font-semibold text-gray-500 ml-4">Kata Sandi</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -74,7 +74,7 @@
                             </div>
                             <input id="password" type="password" name="password" required autocomplete="current-password"
                                 class="w-full pl-11 pr-12 py-3.5 rounded-3xl border border-gray-200 shadow-sm focus:border-[#FCE2CE] focus:ring-[#FCE2CE] bg-white transition-all outline-none placeholder-gray-400"
-                                placeholder="Enter your password">
+                                placeholder="Masukkan kata sandimu">
                             <button type="button" onclick="const p=document.getElementById('password');const show=this.querySelector('.eye-show');const hide=this.querySelector('.eye-hide');if(p.type==='password'){p.type='text';show.classList.add('hidden');hide.classList.remove('hidden')}else{p.type='password';show.classList.remove('hidden');hide.classList.add('hidden')}" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-500 transition-colors">
                                 <!-- Eye icon (show password) -->
                                 <svg class="h-5 w-5 eye-show" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -90,7 +90,7 @@
                         <div class="flex justify-end pt-1">
                             @if (Route::has('password.request'))
                                 <a class="text-xs font-bold text-[#5F402D] hover:underline" href="{{ route('password.request') }}">
-                                    Forgot Password?
+                                    Lupa Kata Sandi?
                                 </a>
                             @endif
                         </div>
@@ -100,13 +100,13 @@
                     <!-- Login Button -->
                     <button type="submit" 
                             class="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-3xl shadow-lg text-base font-bold text-[#5F402D] bg-[#FCE2CE] hover:bg-[#ffdec0] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FCE2CE] transition-all transform hover:scale-[1.01]">
-                        Login
+                        Masuk
                     </button>
 
                     <!-- Separator -->
                     <div class="relative py-1">
                         <div class="relative flex justify-center">
-                            <span class="px-2 text-xs text-gray-400 font-medium">- or -</span>
+                            <span class="px-2 text-xs text-gray-400 font-medium">- atau -</span>
                         </div>
                     </div>
 
@@ -122,7 +122,7 @@
                                          transition-all duration-200 ease-out
                                          group-hover:opacity-100 group-hover:translate-y-0
                                          shadow-lg">
-                                Coming Soon
+                                Segera Hadir
                                 <!-- Triangle -->
                                 <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-800"></span>
                             </span>
@@ -145,7 +145,7 @@
                                          transition-all duration-200 ease-out
                                          group-hover:opacity-100 group-hover:translate-y-0
                                          shadow-lg">
-                                Coming Soon
+                                Segera Hadir
                                 <!-- Triangle -->
                                 <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-800"></span>
                             </span>
@@ -165,7 +165,7 @@
                                          transition-all duration-200 ease-out
                                          group-hover:opacity-100 group-hover:translate-y-0
                                          shadow-lg">
-                                Coming Soon
+                                Segera Hadir
                                 <!-- Triangle -->
                                 <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-800"></span>
                             </span>
@@ -179,8 +179,8 @@
                     </div>
 
                     <p class="text-center text-xs font-semibold text-gray-400 mt-4">
-                        Don't have an account? 
-                        <a href="{{ route('register') }}" class="text-[#5F402D] hover:underline font-bold">Sign up</a>
+                        Belum punya akun? 
+                        <a href="{{ route('register') }}" class="text-[#5F402D] hover:underline font-bold">Daftar sekarang</a>
                     </p>
                 </form>
             </div>
