@@ -33,6 +33,14 @@
             <!-- ========== FORM COLUMN ========== -->
             <div class="order-2 lg:order-2 flex flex-col justify-center w-full max-w-md mx-auto lg:px-8 xl:px-12 lg:py-12 lg:bg-[#FEF6EF]">
                 
+                <!-- Back to Landing Page -->
+                <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#3E2723] transition-colors mb-6 group w-fit">
+                    <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                    Kembali ke Beranda
+                </a>
+
                 <!-- Heading -->
                 <h2 class="text-2xl sm:text-3xl xl:text-4xl font-bold text-[#3E2723] text-center mb-1 whitespace-nowrap" style="font-family: 'Poppins', sans-serif;">
                     Buat Akun Baru
