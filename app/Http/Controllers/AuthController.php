@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -70,5 +71,63 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+    }
+
+    /**
+     * Redirect the user to the Google authentication page.
+     */
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Google and log them in.
+     */
+    public function handleGoogleCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->user();
+        } catch (\Exception $e) {
+            \Log::error('Google OAuth Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            return redirect()->route('login')->withErrors([
+                'email' => 'Gagal masuk dengan Google: ' . $e->getMessage(),
+            ]);
+        }
+
+        // Check if user already exists by google_id or email
+        $user = User::where('google_id', $googleUser->getId())
+                    ->orWhere('email', $googleUser->getEmail())
+                    ->first();
+
+        if ($user) {
+            // Existing user — link Google ID if not yet linked
+            if (!$user->google_id) {
+                $user->update([
+                    'google_id' => $googleUser->getId(),
+                    'avatar'    => $googleUser->getAvatar(),
+                ]);
+            }
+        } else {
+            // New user — create account and seed defaults
+            $user = User::create([
+                'name'      => $googleUser->getName(),
+                'email'     => $googleUser->getEmail(),
+                'google_id' => $googleUser->getId(),
+                'avatar'    => $googleUser->getAvatar(),
+                'password'  => null,
+            ]);
+
+            // Seed default categories for the new user
+            foreach (Category::defaults() as $category) {
+                $user->categories()->create($category);
+            }
+
+            TaskPriority::ensureDefaultsForUser($user);
+        }
+
+        Auth::login($user, true);
+
+        return redirect()->intended('/dashboard');
     }
 }
