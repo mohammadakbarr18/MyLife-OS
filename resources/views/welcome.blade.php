@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistem Pribadi — Sistem Operasi untuk Kehidupanmu</title>
+    <title>Sistem Pribadi</title>
     <meta name="description" content="MyLife OS adalah sistem operasi pribadi untuk mengelola seluruh kehidupan sehari-harimu — keuangan, tugas, jadwal, dan masih banyak lagi. Semua dalam satu tempat yang rapi dan elegan.">
 
     <!-- Fonts -->
